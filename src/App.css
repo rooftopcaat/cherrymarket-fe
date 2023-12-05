@@ -1,38 +1,74 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&family=Noto+Sans+KR:wght@300;400;500&display=swap");
+
+* {
+  font-family: "Noto Sans", sans-serif;
+  letter-spacing: -0.5px;
+}
+:root {
+  --swiper-theme-color: #007aff;
+  font-family: "Noto Sans", "malgun gothic", AppleGothic, dotum, sans-serif;
+}
+html,
+button,
+input,
+select,
+textarea {
+  font-family: "Noto Sans", "malgun gothic", AppleGothic, dotum, sans-serif;
+  letter-spacing: -0.5px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body,
+button,
+input,
+select,
+textarea {
+  font-size: 14px;
+  color: #333;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  margin: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #fff;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+*,
+:after,
+::before {
+  box-sizing: border-box;
+  margin: 0;
 }
 
-.App-link {
-  color: #61dafb;
+body {
+  display: block;
+  margin: 8px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+html {
+  -webkit-text-size-adjust: 100%;
+  line-height: 1.15;
+}
+*,
+:after,
+:before {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+*,
+:after,
+:before,
+legend,
+td,
+th {
+  padding: 0;
+}
+
+button {
+  border-radius: 0;
+  border: none;
 }
