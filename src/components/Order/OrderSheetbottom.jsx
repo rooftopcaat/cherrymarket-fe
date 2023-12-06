@@ -1,5 +1,6 @@
 import Coupon from "./Coupon.jsx";
 import styled from "styled-components";
+import PaymentSheetDetail from "./PaymentSheetDetail.jsx";
 
 
 
@@ -11,7 +12,7 @@ const OrderSheetbottom = () => {
                 <Coupon />
             </ItemSheet>
             <PaymentSheet>
-
+                <PaymentSheetDetail />
             </PaymentSheet>
         </OrderSheetbottomContainer>
     );
