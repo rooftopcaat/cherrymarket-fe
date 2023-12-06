@@ -13,6 +13,7 @@ export const PopupContainer = styled.div`
   z-index: 999;
 `;
 
+
 export const PopupContent = styled.div`
   display: flex;
   flex-direction: column;

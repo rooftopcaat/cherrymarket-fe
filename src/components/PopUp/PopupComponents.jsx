@@ -9,7 +9,7 @@ import {
   NeverShowAgainButton,
 } from './PopupStyles';
 
-const PopupComponent = ({ imageUrl, externalLink }) => {
+const PopupComponent = ({ imageUrl, externalLink, index, onRemove }) => {
   const [isHidden, setIsHidden] = useState(false);
   const imageRef = useRef();
 
@@ -30,8 +30,7 @@ const PopupComponent = ({ imageUrl, externalLink }) => {
 
   const handleNeverShowAgain = () => {
     setIsHidden(true);
-    // 팝업을 다시 보지 않기 위해 로컬 스토리지에 플래그 저장
-    localStorage.setItem('popupData', JSON.stringify([]));
+    onRemove(index);
   };
 
   return (
@@ -47,22 +46,20 @@ const PopupComponent = ({ imageUrl, externalLink }) => {
                 ref={imageRef}
                 src={imageUrl}
                 alt="Popup Image"
-              >
-              </PopupImage>
+              />
             </a>
           </p>
           <CloseButtonContainer>
-            <CloseButton id="closeButton" onClick={handleClosePopup}>
-              닫기
-            </CloseButton>
             <NeverShowAgainButton onClick={handleNeverShowAgain}>
               다시 보지 않기
             </NeverShowAgainButton>
+            <CloseButton id="closeButton" onClick={handleClosePopup}>
+              닫기
+            </CloseButton>
           </CloseButtonContainer>
         </PopupContent>
       </PopupContainer>
     </div>
-    
   );
 };
 

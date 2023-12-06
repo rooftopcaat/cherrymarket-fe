@@ -3,6 +3,7 @@ import React, { useEffect, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Header from "../common/Header/Header";
+import Footer from "../common/Footer/Footer";
 import MainBanner from "../components/MainBanner/MainBanner";
 import Suggest from "../components/Suggest/Suggest";
 import LineBanner from "../components/LineBanner/LineBanner";
@@ -64,6 +65,7 @@ const Main = () => {
           setCategory={setCategory}
         ></Catergories>
       </Suggest>
+      <Footer/>
     </>
   );
 };
