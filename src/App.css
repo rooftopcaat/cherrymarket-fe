@@ -1,19 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&family=Noto+Sans+KR:wght@300;400;500&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700&display=swap');
 * {
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   letter-spacing: -0.5px;
 }
 :root {
   --swiper-theme-color: #007aff;
-  font-family: "Noto Sans", "malgun gothic", AppleGothic, dotum, sans-serif;
+  font-family: "Noto Sans KR", "malgun gothic", AppleGothic, dotum, sans-serif;
 }
 html,
 button,
 input,
 select,
 textarea {
-  font-family: "Noto Sans", "malgun gothic", AppleGothic, dotum, sans-serif;
+  font-family: "Noto Sans KR", "malgun gothic", AppleGothic, dotum, sans-serif;
   letter-spacing: -0.5px;
 }
 

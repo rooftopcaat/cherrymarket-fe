@@ -89,7 +89,9 @@ const Header = () => {
               고객센터
               <ServiceIcon />
               <ServiceNav>
+                <Link to='/mypage'>
                 <div>공지사항</div>
+                </Link>
                 <div>자주하는 질문</div>
                 <div>1:1 문의</div>
                 <div>대량주문 문의</div>

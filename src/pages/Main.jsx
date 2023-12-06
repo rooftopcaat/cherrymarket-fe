@@ -10,6 +10,7 @@ import Catergories from "../components/Categories/Categories";
 
 import { getProductAsync } from "../redux/modules/productSlice";
 import { getCategoryAsync } from "../redux/modules/categorySlice";
+import Footer from "../common/Footer/Footer";
 
 const Main = () => {
   const [category, setCategory] = useState("추석선물세트");
@@ -46,6 +47,7 @@ const Main = () => {
           setCategory={setCategory}
         ></Catergories>
       </Suggest>
+      <Footer />
     </>
   );
 };
