@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const FixedHeaderWrap = styled.div`
+  
   min-width: 1050px;
   letter-spacing: -0.3px;
   background-color: rgb(255, 255, 255);

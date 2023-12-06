@@ -6,6 +6,8 @@ import Cart from "../pages/Cart";
 import Admin from "../pages/Admin";
 import Detail from "../pages/Detail";
 import Newest from "../pages/Newest";
+import Kakao from "../components/Callback/Kakao";
+import Naver from "../components/Callback/Naver";
 
 const Router = () => {
   return (
@@ -14,6 +16,8 @@ const Router = () => {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
+          <Route path="auth/kakao/callback" element={<Kakao />} />
+          <Route path="auth/naver/callback" element={<Naver />} />
           <Route path="/join" element={<Join />} />
           <Route path="/detail/:productId" element={<Detail />} />
           <Route path="/cart" element={<Cart />} />

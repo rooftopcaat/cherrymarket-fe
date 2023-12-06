@@ -15,7 +15,7 @@ const Category = ({ showHover }) => {
                   <div>
                     <img
                       src="https://collection-image.kurly.com/site-category-groups/53/HvsqcMrtERGBYLaqXIDukRUpaPNHl6qiFffd2T5E.png"
-                      alt="추선선물세트"
+                      alt="추석선물세트"
                     />
                     <span>추석선물세트</span>
                   </div>
@@ -55,6 +55,7 @@ export const CatrgoryIcon = styled.span`
 
 export const CategoryNav = styled.div`
   max-height: calc(95vh-55px);
+  font-weight: Normal;
   min-height: 200px;
   position: absolute;
   display: flex;

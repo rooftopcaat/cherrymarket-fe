@@ -6,6 +6,10 @@ import useInput from "../../hooks/useInput";
 import styled from "styled-components";
 import { Input } from "../../elements/Input";
 import { Btn } from "../../elements/Btn";
+import naverIcon from "../../assets/naverIcon.png";
+import kakaoIcon from "../../assets/kakaoIcon.png";
+import googleIcon from "../../assets/googleIcon.png";
+
 
 function LoginForm() {
   const nav = useNavigate();
@@ -27,6 +31,14 @@ function LoginForm() {
       nav("/");
     }
   };
+
+  // const naverLogin = () => {
+
+  // };
+
+  // const kakaoLogin = () => {
+
+  // };
 
   const loginCheck = localStorage.getItem("token");
   // console.log(loginCheck);
@@ -97,6 +109,20 @@ function LoginForm() {
               회원가입
             </Btn>
           </BtnWrapper>
+          <SocialLoginButtonContainer>
+            <SocialButton>
+            <IconImage src={naverIcon} alt="네이버 로그인" />
+            <ButtonText>네이버 로그인</ButtonText>
+            </SocialButton>
+            <SocialButton>
+            <IconImage src={kakaoIcon} alt="카카오 로그인" />
+            <ButtonText>카카오 로그인</ButtonText>
+            </SocialButton>
+            <SocialButton>
+            <IconImage src={googleIcon} alt="구글 로그인" />
+            <ButtonText>구글 로그인</ButtonText>
+            </SocialButton>
+          </SocialLoginButtonContainer>
         </form>
       </Body>
     </Container>
@@ -150,4 +176,38 @@ const BtnWrapper = styled.div`
   margin-top: 28px;
   position: relative;
   height: 48px;
+`;
+
+const SocialLoginButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-around; 
+  align-items: center;
+  height: 170px; 
+  margin-top: 28px;
+  margin-left: 6px;
+`;
+
+const SocialButton = styled.div`
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  width: calc(100% / 3); 
+  cursor: pointer;
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+`;
+// 이미지 스타일
+const IconImage = styled.img`
+  height: 48px;
+  margin-top: 30px;
+`;
+
+// 텍스트 스타일
+const ButtonText = styled.span`
+  margin-top: 10px;
+  font-size: 12px;
+  color: #000;
+  text-align: center;
 `;
