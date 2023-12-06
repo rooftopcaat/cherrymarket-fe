@@ -32,19 +32,19 @@ const Main = () => {
 
   const list = useSelector((state) => state.product.data);
 
-  const popupData1 = [
-    {
-      imageUrl: "https://kr.object.ncloudstorage.com/cherry-resource/popup_1.jpg",
-      externalLink: "https://www.kurly.com/shop/event/kurlyEventV2.php?lego=event/2023/0911/join/coupon",
-    },
-    {
+  // const popupData1 = [
+  //   {
+  //     imageUrl: "https://kr.object.ncloudstorage.com/cherry-resource/popup_1.jpg",
+  //     externalLink: "https://www.kurly.com/shop/event/kurlyEventV2.php?lego=event/2023/0911/join/coupon",
+  //   },
+  //   {
       
-      imageUrl: "https://kr.object.ncloudstorage.com/cherry-resource/popup_2.jpg",
-      externalLink: "https://www.kurly.com/member/membership",
-    },
-  ];
+  //     imageUrl: "https://kr.object.ncloudstorage.com/cherry-resource/popup_2.jpg",
+  //     externalLink: "https://www.kurly.com/member/membership",
+  //   },
+  // ];
   
-  localStorage.setItem('popupData', JSON.stringify(popupData1));
+  // localStorage.setItem('popupData', JSON.stringify(popupData1));
 
   const storedPopupData = localStorage.getItem('popupData');
   const popupData = storedPopupData ? JSON.parse(storedPopupData) : null;
