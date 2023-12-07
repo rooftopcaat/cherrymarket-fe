@@ -1,6 +1,10 @@
 import Coupon from "./Coupon.jsx";
 import styled from "styled-components";
 import PaymentSheetDetail from "./PaymentSheetDetail.jsx";
+import Point from "./Point.jsx";
+import TossPay from "./TossPay.jsx";
+import PaymentGuide from "./PaymentGuide.jsx";
+import PaymentBtn from "./PaymentBtn.jsx";
 
 
 
@@ -10,6 +14,10 @@ const OrderSheetbottom = () => {
         <OrderSheetbottomContainer>
             <ItemSheet>
                 <Coupon />
+                <Point />
+                <TossPay />
+                <PaymentGuide />
+                <PaymentBtn />
             </ItemSheet>
             <PaymentSheet>
                 <PaymentSheetDetail />
