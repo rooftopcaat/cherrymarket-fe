@@ -11,6 +11,8 @@ import Catergories from "../components/Categories/Categories";
 import { getProductAsync } from "../redux/modules/productSlice";
 import { getCategoryAsync } from "../redux/modules/categorySlice";
 import Footer from "../common/Footer/Footer";
+import FixedCard from "../components/Main/FixedCard";
+import FixedImg from "../components/Main/CardList";
 
 const Main = () => {
   const [category, setCategory] = useState("추석선물세트");
@@ -37,15 +39,10 @@ const Main = () => {
     <>
       <Header />
       <MainBanner />
-      <Suggest list={list}>이 상품 어때요?</Suggest>
+      <FixedImg />
       <LineBanner />
       <SpeacilDeals>추석특가</SpeacilDeals>
       <Suggest list={CateogryFilter}>
-        MD의 추천
-        <Catergories
-          onChangeCategory={onChangeCategory}
-          setCategory={setCategory}
-        ></Catergories>
       </Suggest>
       <Footer />
     </>
