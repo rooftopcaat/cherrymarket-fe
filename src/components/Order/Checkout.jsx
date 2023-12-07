@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { loadPaymentWidget, ANONYMOUS } from "@tosspayments/payment-widget-sdk";
 import "./style.css";
+
 const generateRandomString = () => window.btoa(Math.random()).slice(0, 20);
 
 export function CheckoutPage() {
@@ -44,32 +45,6 @@ export function CheckoutPage() {
         <div id="agreement" className="w-100" />
         <div className="btn-wrapper w-100">
           <p className="test-payment">실제로 금액이 빠져나가지 않는 테스트에요</p>
-         
-          <button
-            className="btn primary w-100"
-            onClick={async () => {
-              const paymentWidget = paymentWidgetRef.current;
-    
-              try {
-                /**
-                 * 결제 요청
-                 * @docs https://docs.tosspayments.com/reference/widget-sdk#requestpayment%EA%B2%B0%EC%A0%9C-%EC%A0%95%EB%B3%B4
-                 */
-                await paymentWidget?.requestPayment({
-                  orderId: generateRandomString(),
-                  orderName: "토스 티셔츠 외 2건",
-                  customerName: "김토스",
-                  customerEmail: "customer123@gmail.com",
-                  successUrl: window.location.origin + "/sandbox/success" + window.location.search,
-                  failUrl: window.location.origin + "/sandbox/fail" + window.location.search
-                });
-              } catch (error) {
-                // TODO: 에러 처리
-              }
-            }}
-          >
-            결제하기
-          </button>
         </div>
       </div>
     </div>
