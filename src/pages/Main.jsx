@@ -6,12 +6,9 @@ import MainBanner from "../components/MainBanner/MainBanner";
 import Suggest from "../components/Suggest/Suggest";
 import LineBanner from "../components/LineBanner/LineBanner";
 import SpeacilDeals from "../components/SpecialDeals/SpecialDeals";
-import Catergories from "../components/Categories/Categories";
 
 import { getProductAsync } from "../redux/modules/productSlice";
 import { getCategoryAsync } from "../redux/modules/categorySlice";
-import Footer from "../common/Footer/Footer";
-import FixedCard from "../components/Main/FixedCard";
 import FixedImg from "../components/Main/CardList";
 
 const Main = () => {
@@ -44,7 +41,6 @@ const Main = () => {
       <SpeacilDeals>추석특가</SpeacilDeals>
       <Suggest list={CateogryFilter}>
       </Suggest>
-      <Footer />
     </>
   );
 };
