@@ -38,7 +38,14 @@ export const NavCenter = styled.ul`
     padding-top: 18px;
     line-height: 20px;
     text-align: center;
+
+    & :hover {
+      color : #950526;
+      border-bottom: 2px solid #950526;
+    }
+
   }
+
   & span {
     height: fit-content;
     font-size: 16px;

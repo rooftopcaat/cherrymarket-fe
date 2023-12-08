@@ -17,6 +17,7 @@ import {
   CartIconWrap,
   HeadLogOut,
 } from "./styles";
+import Headercoupon from "./HeaderNav/Headercoupon";
 import logo from "./logo.svg";
 import HeaderNav from "./HeaderNav/HeaderNav";
 import FixedHeader from "./FixedHeader/FixedHeader";
@@ -65,6 +66,7 @@ const Header = () => {
 
   return (
     <>
+      <Headercoupon />
       <HeadTop>
         <UserHead>
           {!userData.nickName ? (
@@ -99,8 +101,8 @@ const Header = () => {
         </UserHead>
         <HeadMain>
           <HeadLeft to="/">
-            <img src={logo} alt="마켓컬리 로고" />
-            <LogoButton>마켓컬리</LogoButton>
+            <img src={logo} alt="마켓체리 로고" />
+            <LogoButton>마켓체리</LogoButton>
           </HeadLeft>
           <HeadCenter>
             <SearchForm>
