@@ -1,5 +1,7 @@
+
 import React from "react";
 import styled from "styled-components";
+import { BsCart } from "react-icons/bs";
 
 const FixedCard = (props) => {
 
@@ -10,13 +12,20 @@ const FixedCard = (props) => {
         <CardSt>
           <ImageSt>
             <img
-              style={{ width: "250px", height: "320px" }}
+              style={{ width: "250px", height: "300px" }}
               src={props.item.src}
             />
           </ImageSt>
+          <ButtonSt>
+          <BsCart /> 담기
+          </ButtonSt>
           <h3 style={{ marginLeft: "4px", fontSize: "16px" }}>
             {props.item.alt}
           </h3>
+          <OriginalPriceSt>
+          {props.item.originalPrice}원
+           </OriginalPriceSt>
+
           <span
             style={{ marginLeft: "4px", fontSize: "16px", color: "#FA622F" }}
           >
@@ -54,8 +63,41 @@ const CardSt = styled.div`
 const ImageSt = styled.div`
   /* background-color: yellow; */
   width: 100%;
-  height: 320px;
+  height: 305px;
   margin: auto;
+`;
+
+const ButtonSt = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 36px;
+  margin-top: 0px;
+  padding-bottom: 1px;
+  font-size: 16px;
+  line-height: 29px;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  &:hover {
+    background-color: #f3f3f3; 
+  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px; /* 버튼 내부 요소 사이의 간격을 8px로 설정 */
+`;
+
+const OriginalPriceSt = styled.span`
+  display: block;
+  padding-top: 2px;
+  color: rgb(181, 181, 181);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  text-decoration: line-through;
 `;
 
 export default FixedCard;

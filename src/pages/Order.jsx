@@ -50,7 +50,6 @@ const OrderUser = () => {
         </OrderUserInfoContainer>
         </div>
     )
-
 };
 
 
