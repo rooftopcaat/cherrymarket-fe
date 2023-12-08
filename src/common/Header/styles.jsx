@@ -214,3 +214,7 @@ export const HeadLogOut = styled.div`
   text-decoration: none;
   color: inherit;
 `;
+export const CustomerLink = styled(Link)`
+text-decoration: none;
+color: inherit;
+`;

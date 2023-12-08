@@ -16,6 +16,7 @@ import {
   HeadRightContents,
   CartIconWrap,
   HeadLogOut,
+  CustomerLink,
 } from "./styles";
 import Headercoupon from "./HeaderNav/Headercoupon";
 import logo from "./logo.svg";
@@ -91,9 +92,15 @@ const Header = () => {
               고객센터
               <ServiceIcon />
               <ServiceNav>
-                <div>공지사항</div>
-                <div>자주하는 질문</div>
-                <div>1:1 문의</div>
+              <CustomerLink to= "/notice">
+                  <div>공지사항</div>
+                </CustomerLink>
+                <CustomerLink to= "/faq">
+                  <div>자주하는 질문</div>
+                </CustomerLink>
+                <CustomerLink to= "/qna">
+                  <div>1:1 문의</div>
+                </CustomerLink>
                 <div>대량주문 문의</div>
               </ServiceNav>
             </HeadUserLink>
