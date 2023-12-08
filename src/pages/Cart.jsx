@@ -5,6 +5,7 @@ import Header from "../common/Header/Header";
 import { useSelector } from "react-redux";
 import CartItems from "../components/CartList/CartItems";
 import jwtDecode from "jwt-decode";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const CartList = useSelector((state) => state.cart.cart?.cart);
@@ -96,7 +97,9 @@ const Cart = () => {
                 </Text>
               </TotalPrice>
               <Done>
+                <Link to="/order">
                 <button>주문하기</button>
+                </Link>
               </Done>
             </CartStatusWrap>
           </RightSide>
