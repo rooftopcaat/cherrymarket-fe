@@ -12,28 +12,29 @@ import {
 
 const slides = [
   {
-    src: "https://product-image.kurly.com/cdn-cgi/image/format=auto/banner/main/pc/img/c22f86b2-3bb3-4974-ac4e-0668e69501c9.jpg",
+    src: "https://kr.object.ncloudstorage.com/cherry-resource/banner-1.jpg",
+  },
+
+  {
+    src: "https://kr.object.ncloudstorage.com/cherry-resource/banner-2.jpg",
   },
   {
-    src: "https://product-image.kurly.com/cdn-cgi/image/format=auto/banner/main/pc/img/44517000-959a-4702-be73-34e35c35f8a8.jpg",
+    src: "https://kr.object.ncloudstorage.com/cherry-resource/banner-3.jpg",
   },
   {
-    src: "https://product-image.kurly.com/cdn-cgi/image/format=auto/banner/main/pc/img/c69cdb49-84bb-43a7-91aa-9d703cba994b.jpg",
+    src: "https://kr.object.ncloudstorage.com/cherry-resource/banner-4.jpg",
   },
   {
-    src: "https://product-image.kurly.com/cdn-cgi/image/format=auto/banner/main/pc/img/26f022f6-8675-4768-b645-8751c22fb166.jpg",
+    src: "https://kr.object.ncloudstorage.com/cherry-resource/banner-5.jpg",
   },
   {
-    src: "https://product-image.kurly.com/cdn-cgi/image/format=auto/banner/main/pc/img/e555d31c-df05-44a6-ba00-eb64156e1c76.jpg",
+    src: "https://kr.object.ncloudstorage.com/cherry-resource/banner-6.jpg",
   },
   {
-    src: "https://product-image.kurly.com/cdn-cgi/image/format=auto/banner/main/pc/img/300ef081-0ccc-4cf9-8eab-ec5117e7ec2c.jpg",
+    src: "https://kr.object.ncloudstorage.com/cherry-resource/banner-7.jpg",
   },
   {
-    src: "https://img-cf.kurly.com/cdn-cgi/image/format=auto/banner/main/pc/img/39c28de9-2a7f-43bc-9e41-648befae3c95",
-  },
-  {
-    src: "https://product-image.kurly.com/cdn-cgi/image/format=auto/banner/main/pc/img/026ebc78-835d-4bed-ad49-9a55b2ce0b36.jpg",
+    src: "https://kr.object.ncloudstorage.com/cherry-resource/banner-8.jpg",
   },
 ];
 

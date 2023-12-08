@@ -89,17 +89,18 @@ export const HeadLeft = styled(Link)`
 `;
 
 export const LogoButton = styled.button`
+  font-family: "Noto Sans KR", sans-serif;
   flex-shrink: 0;
   margin-left: 20px;
   font-size: 18px;
-  font-weight: normal;
+  font-weight: 100;
   line-height: 1.33;
-  letter-spacing: normal;
+  letter-spacing: 0.3px;
   color: rgb(181, 181, 181);
   border-radius: 0;
   cursor: pointer;
   font-weight: 600;
-  color: rgb(95, 0, 128);
+  color: #950526;
   border: none;
   background-color: inherit;
 `;

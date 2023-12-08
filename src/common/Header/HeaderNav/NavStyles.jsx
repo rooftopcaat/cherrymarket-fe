@@ -51,6 +51,6 @@ export const NavLeft = styled.div`
   }
   & span {
     font-weight: 500;
-    color: rgb(95, 0, 128);
+    color: #950526;
   }
 `;

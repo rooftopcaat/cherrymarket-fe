@@ -24,7 +24,7 @@ const HeaderNav = () => {
           <HeadNavCenter />
           <NavLeft>
             <a href="">
-              <span>샛별・낮</span>
+              <span>샛별・하루 </span>
               배송안내
             </a>
           </NavLeft>
