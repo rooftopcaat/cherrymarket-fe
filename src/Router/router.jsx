@@ -6,8 +6,14 @@ import Cart from "../pages/Cart";
 import Admin from "../pages/Admin";
 import Detail from "../pages/Detail";
 import Newest from "../pages/Newest";
+import Order from "../pages/Order";
+import Mypage from "../pages/Mypage";
 import Kakao from "../components/Callback/Kakao";
 import Naver from "../components/Callback/Naver";
+import Notice from "../pages/Notice";
+import Faq from "../pages/Faq";
+import Qna from "../pages/Qna";
+import QnaInsert from "../pages/QnaInsert";
 
 const Router = () => {
   return (
@@ -23,6 +29,12 @@ const Router = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/newest" element={<Newest />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/notice" element={<Notice />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/qna" element={<Qna />} />
+          <Route path="/qnaInsert" element={<QnaInsert />} />
         </Routes>
       </BrowserRouter>
     </>

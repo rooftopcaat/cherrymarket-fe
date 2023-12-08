@@ -8,10 +8,10 @@ import MainBanner from "../components/MainBanner/MainBanner";
 import Suggest from "../components/Suggest/Suggest";
 import LineBanner from "../components/LineBanner/LineBanner";
 import SpeacilDeals from "../components/SpecialDeals/SpecialDeals";
-import Catergories from "../components/Categories/Categories";
 
 import { getProductAsync } from "../redux/modules/productSlice";
 import { getCategoryAsync } from "../redux/modules/categorySlice";
+import FixedImg from "../components/Main/CardList";
 import PopupList from '../components/PopUp/PopupList';
 
 const Main = () => {
@@ -54,16 +54,12 @@ const Main = () => {
     <>
       <Header />
       <MainBanner />
+      <FixedImg />
       <PopupList popupData={popupData} />
       <Suggest list={list}>이 상품 어때요?</Suggest>
       <LineBanner />
       <SpeacilDeals>추석특가</SpeacilDeals>
       <Suggest list={CateogryFilter}>
-        MD의 추천
-        <Catergories
-          onChangeCategory={onChangeCategory}
-          setCategory={setCategory}
-        ></Catergories>
       </Suggest>
       <Footer/>
     </>
