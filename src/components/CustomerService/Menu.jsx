@@ -34,14 +34,14 @@ function Menu() {
 
 export default Menu;
 
-const Container = styled.div`
+export const Container = styled.div`
     width: 200px;
     height : 100%;
     margin-top : -30px;
     padding: 40px 0px;
     box-sizing: border-box;
 `;
-const Title = styled.h2`
+export const Title = styled.h2`
     height : 75px;
     padding : 5px 0 35px 1px;
     font-size: 20px;
@@ -50,14 +50,14 @@ const Title = styled.h2`
     color : #333;
     letter-spacing: -1px;
 `;
-const Customerul = styled.ul`
+export const Customerul = styled.ul`
     border: 1px solid #f2f2f2;
     list-style: none;
     margin: 0px;
     padding: 0px;
 `;
 
-const Customerli = styled.li`
+export const Customerli = styled.li`
     display: list-item;
     text-align: -webkit-match-parent;
     & a {
@@ -81,7 +81,7 @@ const Customerli = styled.li`
     }
 `;
 
-const Customera = styled.a`
+export const Customera = styled.a`
     cursor: pointer;
     width : 100%;
     height : 60px;

@@ -5,6 +5,7 @@ import { Categorywrap } from "../HeaderNav/NavStyles";
 import HeadNavCenter from "../elements/NavCenter";
 import { HeadRight, HeadRightContents, CartIconWrap } from "../styles";
 import { Link } from "react-router-dom";
+import { IoPersonCircleOutline } from "react-icons/io5";
 
 const FixedHeader = ({ CartList }) => {
   const [showHover, setShowHover] = useState(false);

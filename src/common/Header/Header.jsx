@@ -27,6 +27,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCartAysnc } from "../../redux/modules/cartSlice";
 import jwtDecode from "jwt-decode";
 import { instance } from "../../redux/modules/instance";
+import { IoPersonCircleOutline } from "react-icons/io5";
 
 const Header = () => {
   const [showFixedHeader, setShwoFixedHeader] = useState(false);
@@ -119,8 +120,10 @@ const Header = () => {
           </HeadCenter>
           <HeadRight>
             <HeadRightContents>
+            <CartIconWrap>
+              </CartIconWrap>
               <div></div>
-              <button aria-label="찜하기" type="button"></button>
+              <button aria-label="찜하기" type="button"><Link to="/mypage/pick"></Link></button>
               <CartIconWrap>
                 <Link to="/cart">
                   <button>
@@ -128,6 +131,11 @@ const Header = () => {
                   </button>
                 </Link>
               </CartIconWrap>
+              <Link to="/mypage/order">
+                  <button>
+                  <IoPersonCircleOutline />
+                  </button>
+                </Link>
             </HeadRightContents>
           </HeadRight>
         </HeadMain>

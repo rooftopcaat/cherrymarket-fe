@@ -1,7 +1,8 @@
 
 import React, { useEffect } from "react";
-import Header from "../common/Header/Header";
+import Header from "../../common/Header/Header";
 import './Mypage.css'
+
 
 const Mypage = () => {
 
@@ -101,8 +102,7 @@ const Mypage = () => {
     }
 
     return (
-        <div>
-            <Header />
+       <>
             <div className="mypageContainer1">
                 <div className="mypageContainer">
                     <div className="mypageItem">
@@ -119,8 +119,7 @@ const Mypage = () => {
                     </div>
                 </div>
             </div>
-            <h1>My page</h1>
-        </div>
+        </>
     )
 };
 

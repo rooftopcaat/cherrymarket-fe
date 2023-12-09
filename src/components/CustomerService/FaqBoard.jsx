@@ -158,7 +158,7 @@ const FaqBoard = () => {
 
 export default FaqBoard;
 
-const SubTitleNo = styled.th`
+export const SubTitleNo = styled.th`
     flex-basis: 70px;
     text-align: center;
     line-height: 20px;
@@ -166,7 +166,7 @@ const SubTitleNo = styled.th`
     color: rgb(51, 51, 51);
 `;
 
-const SubTitleCategory = styled.th`
+export const SubTitleCategory = styled.th`
     flex-basis: 135px;
     text-align: center;
     line-height: 20px;
@@ -174,7 +174,7 @@ const SubTitleCategory = styled.th`
     color: rgb(51, 51, 51);
 `;
 
-const SubTitleLine = styled.th`
+export const SubTitleLine = styled.th`
     -webkit-box-flex: 1;
     flex-grow: 1;
     text-align: center;
@@ -182,46 +182,46 @@ const SubTitleLine = styled.th`
     font-weight: 400;
     color: rgb(51, 51, 51);
 `;
-const UlWrapper = styled.ul`
+export const UlWrapper = styled.ul`
     display: flex;
     flex-direction: column;
     font-size: bold;
 `;
 
-const LiWrapper = styled.li`
+export const LiWrapper = styled.li`
     display: list-item;
     text-align: -webkit-match-parent;
     cursor: pointer;
     list-style: none;
 `;
 
-const DivWrapper = styled.div`
+export const DivWrapper = styled.div`
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid rgb(244, 244, 244);
 `;
-const DivNo = styled.div`
+export const DivNo = styled.div`
     text-align: center;
     padding: 20px 0px;
     color: rgb(76, 76, 76);
     flex-basis: 70px;
 `;
 
-const DivCategory = styled.div`
+export const DivCategory = styled.div`
     text-align: center;
     padding: 20px 0px;
     color: rgb(76, 76, 76);
     flex-basis: 135px;
 `;
 
-const DivTitle = styled.div`
+export const DivTitle = styled.div`
     padding: 20px 0px 20px 20px;
     color: rgb(76, 76, 76);
     flex: 1 1 0%;
     text-align: left;
 `;
 
-const Answer = styled.div`
+export const Answer = styled.div`
     display: inline-block;
     content: "";
     top: 30px;
