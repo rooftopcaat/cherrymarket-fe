@@ -55,7 +55,7 @@ const Div1 = styled.div`
 
 `;
 
-const A = styled.a`
+export const A = styled.a`
 display: block;
     position: relative;
     width: 60px;
@@ -137,7 +137,7 @@ display: block;
     border: 1px solid rgb(95, 0, 128);
 `;
 
-const Img = styled.img`
+export const Img = styled.img`
 position: absolute;
     inset: 0px;
     box-sizing: border-box;

@@ -90,7 +90,7 @@ text-align: right;
 cursor: pointer;
 `;
 
-const DeliveryChangeGuideIcon = styled.span`
+export const DeliveryChangeGuideIcon = styled.span`
 display: inline-block;
 width: 20px;
 height: 20px;

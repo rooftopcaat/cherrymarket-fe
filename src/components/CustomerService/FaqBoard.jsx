@@ -186,6 +186,7 @@ export const UlWrapper = styled.ul`
     display: flex;
     flex-direction: column;
     font-size: bold;
+    list-style-type: none;
 `;
 
 export const LiWrapper = styled.li`

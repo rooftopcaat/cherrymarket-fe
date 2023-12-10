@@ -66,7 +66,7 @@ const SubTitleNo = styled.th`
     color: rgb(51, 51, 51);
 `;
 
-const SubTitleLine = styled.th` 
+export const SubTitleLine = styled.th` 
     -webkit-box-flex: 1;
     flex-grow: 1;
     text-align: center;
@@ -75,7 +75,7 @@ const SubTitleLine = styled.th`
     color: rgb(51, 51, 51);
 `;
 
-const SubTitleWriter = styled.th`
+export const SubTitleWriter = styled.th`
     flex-basis: 100px;
     text-align: center;
     line-height: 20px;
