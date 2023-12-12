@@ -72,6 +72,8 @@ const Header = () => {
         <UserHead>
           {!userData.nickName ? (
             <>
+              <HeadUserLink to="/admin">관리자</HeadUserLink>
+              <HeadeVertical />
               <HeadUserLink to="/join">회원가입</HeadUserLink>
               <HeadeVertical />
               <HeadUserLink to="/login" style={{ color: "inherit" }}>

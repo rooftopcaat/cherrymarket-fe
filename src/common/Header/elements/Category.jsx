@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import SidebarItems from "./SidebarItems";
 
 const Category = ({ showHover }) => {
+
   return (
     <>
       <CatrgoryIcon></CatrgoryIcon>
@@ -12,27 +14,18 @@ const Category = ({ showHover }) => {
             <div>
               <ul>
                 <HeadSideBarItmes>
-                  <div>
-                    <img
-                      src="https://collection-image.kurly.com/site-category-groups/53/HvsqcMrtERGBYLaqXIDukRUpaPNHl6qiFffd2T5E.png"
-                      alt="추석선물세트"
-                    />
-                    <span>추석선물세트</span>
-                  </div>
-                  <div>
-                    <img
-                      src="https://collection-image.kurly.com/site-category-groups/12/xtK9aF5n9OfmNfWuLMmyHzxUaj7Y9pVx2MPetIex.png"
-                      alt="와인"
-                    />
-                    <span>와인</span>
-                  </div>
-                  <div>
-                    <img
-                      src="https://collection-image.kurly.com/site-category-groups/2/EO7bBGPrhrByqlpJYMuIFOLWo0IiOMkgMYar4Tjv.png"
-                      alt="과일"
-                    />
-                    <span>과일</span>
-                  </div>
+                  <SidebarItems imageName="채소" label="채소" />
+                  <SidebarItems imageName="과일견과쌀" label="과일·견과·쌀" />
+                  <SidebarItems imageName="수산해산건어물" label="수산·해산·건어물" />
+                  <SidebarItems imageName="정육가공육계란" label="정육·가공육·계란" />
+                  <SidebarItems imageName="국반찬메인요리" label="국·반찬·메인요리" />
+                  <SidebarItems imageName="간편식밀키트샐러드" label="간편식·밀키트·샐러드" />
+                  <SidebarItems imageName="면양념오일" label="면·양념·오일" />
+                  <SidebarItems imageName="생수음료커피" label="생수·음료·커피" />
+                  <SidebarItems imageName="간식과자떡" label="간식·과자·떡" />
+                  <SidebarItems imageName="베이커리" label="베이커리" />
+                  <SidebarItems imageName="유제품" label="유제품" />
+                  <SidebarItems imageName="건강식품" label="건강식품" />
                 </HeadSideBarItmes>
               </ul>
             </div>
@@ -79,6 +72,7 @@ export const HeadSideBar = styled.div`
     animation: 0 linear 0s 1 normal none running animation-w43n76;
   }
   & ul {
+    overflow-x: hidden;
     overflow-y: auto;
     width: 247px;
     height: 100%;
@@ -102,7 +96,7 @@ export const HeadSideBarItmes = styled.li`
     width: 24px;
     height: 24px;
   }
-  &span {
+  & span {
     flex: 1 1 0%;
     padding: 1px 20px 0px 10px;
     color: rgb(51, 51, 51);
