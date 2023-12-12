@@ -1,0 +1,103 @@
+import styled from 'styled-components';
+import { H3, TitleContainer } from './Style.jsx';
+
+const PatmentBox = () => {
+
+  return (
+    <>
+    <TitleContainer>
+        <H3>결제정보</H3>
+    </TitleContainer>
+    <Ul>
+        <Li>
+            <TitleSapn>상품금액</TitleSapn>
+            <PriceSpan>32,800원</PriceSpan>
+        </Li>
+        <Li>
+            <TitleSapn>배송비</TitleSapn>
+            <PriceSpan>0원</PriceSpan>
+        </Li>
+        <Li>
+            <TitleSapn>쿠폰할인</TitleSapn>
+            <PriceSpan>-7000원</PriceSpan>
+        </Li>
+        <Li>
+            <TitleSapn>카드즉시할인</TitleSapn>
+            <PriceSpan>0원</PriceSpan>
+        </Li>
+        <Li>
+            <TitleSapn>적립금</TitleSapn>
+            <PriceSpan>0원</PriceSpan>
+        </Li>
+        <Li>
+            <TitleSapn>결제금액</TitleSapn>
+            <PriceSpan>25,800원</PriceSpan>
+        </Li>
+        <Li>
+            <TitleSapn>적립금액</TitleSapn>
+            <span style={{marginRight:'4px', color:'rgb(153, 153, 153)'}}>배송완료 7일후 적립</span>
+            <PriceSpan>1,290원</PriceSpan>
+        </Li>
+        <Li>
+            <TitleSapn>결제방법</TitleSapn>
+            <PriceSpan>카카오페이(카카오페이머니)</PriceSpan>
+        </Li>
+    </Ul>
+    
+    </>
+  )
+
+}
+
+export default PatmentBox;
+
+const PointSpan = styled.span`
+display: flex;
+-webkit-box-pack: justify;
+justify-content: space-between;
+color: rgb(153, 153, 153);
+padding-bottom: 8px;
+font-size: 14px;
+letter-spacing: -0.5px;
+line-height: 20px;
+`;
+
+const PointLi = styled.li`
+display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    color: rgb(153, 153, 153);
+    padding-bottom: 8px;
+    font-size: 14px;
+    letter-spacing: -0.5px;
+    line-height: 20px;
+    padding-top: 8px;
+}
+`;
+
+const PriceSpan = styled.span`
+font-weight: 500;
+color: rgb(51, 51, 51);
+`;
+
+const TitleSapn = styled.span`
+flex: 1 1 0%;
+    color: rgb(102, 102, 102);
+`;
+
+const Li = styled.li`
+display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding-bottom: 24px;
+    font-size: 16px;
+    line-height: 21px;
+`;
+
+const Ul = styled.ul`
+padding: 20px 0px 4px;
+margin-bottom: 60px;
+border-bottom: 1px solid rgb(244, 244, 244);
+list-style-type: none;
+`;
+

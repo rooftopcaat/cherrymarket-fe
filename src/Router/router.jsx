@@ -17,13 +17,15 @@ import QnaInsert from "../pages/QnaInsert";
 import TossPay from "../components/Order/TossPay";
 import { SuccessPage } from "../pages/Success";
 import { FailPage } from "../pages/Fail";
-import OrderDetail from "../pages/Mypages/OrderDetail";
 import Pick from "../pages/Mypages/Pick";
 import Coupon from "../pages/Mypages/Coupon";
 import MyInfo from "../pages/Mypages/MyInfo";
 import ProductInquiry from "../pages/Mypages/ProductInquiry";
 import Review from "../pages/Mypages/Review";
 import MypageAddress from "../pages/Mypages/MypageAddress";
+import Point from '../pages/Mypages/Point';
+import MyOrderDetail from '../pages/Mypages/MyOrderDetail';
+import MyOrder from "../pages/Mypages/MyOrder";
 
 const Router = () => {
   return (
@@ -41,13 +43,15 @@ const Router = () => {
           <Route path="/admin" element={<Admin />} />
           <Route path="/order" element={<Order />} />
           <Route path="/mypage" element={<Mypage />} />
-          <Route path="/mypage/order" element={<OrderDetail />} />
+          <Route path="/mypage/order" element={<MyOrder />} />
           <Route path="/mypage/pick" element={<Pick />} />
           <Route path="/mypage/Coupon" element={<Coupon />} />
           <Route path="/mypage/info" element={<MyInfo />} />
           <Route path="/mypage/address" element={<MypageAddress />} />
           <Route path="/mypage/inquiry/products" element={<ProductInquiry />} />
           <Route path="/mypage/review" element={<Review />} />
+          <Route path="/mypage/point" element={<Point />} />
+          <Route path="/mypage/myorderdetail" element={<MyOrderDetail />} />
           <Route path="/notice" element={<Notice />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/qna" element={<Qna />} />

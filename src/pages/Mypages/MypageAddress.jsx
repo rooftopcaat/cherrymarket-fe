@@ -13,6 +13,8 @@ import {
 import { UlWrapper } from "../../components/CustomerService/FaqBoard.jsx";
 import styled from "styled-components";
 import AddressBox from "../../components/Mypage/AddressBox.jsx";
+import FixedSiderbar from "../../common/FiexDiderbar/FixedSiderbar.jsx";
+import Footer from "../../common/Footer/Footer.jsx";
 
 const MypageAddress = () => {
   return (
@@ -55,6 +57,8 @@ const MypageAddress = () => {
           </UlWrapper>
         </Container>
       </FlexWrapper>
+      <FixedSiderbar />
+      <Footer />
     </>
   );
 };

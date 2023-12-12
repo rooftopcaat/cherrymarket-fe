@@ -14,6 +14,8 @@ import { UlWrapper } from "../../components/CustomerService/FaqBoard.jsx";
 import styled, { css } from "styled-components";
 import WriteReview from '../../components/Mypage/WriteReview.jsx';
 import WrittenReview from '../../components/Mypage/WrittenReview.jsx';
+import FixedSiderbar from '../../common/FiexDiderbar/FixedSiderbar.jsx';
+import Footer from '../../common/Footer/Footer.jsx';
 
 
 
@@ -54,6 +56,8 @@ const Review = () => {
         {activeTab === 'written' && <WrittenReview />}
         </Container>
         </FlexWrapper>
+        <FixedSiderbar />
+        <Footer />
         </>
     )
 }

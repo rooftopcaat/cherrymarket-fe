@@ -13,6 +13,7 @@ import { getProductAsync } from "../redux/modules/productSlice";
 import { getCategoryAsync } from "../redux/modules/categorySlice";
 import FixedImg from "../components/Main/CardList";
 import PopupList from '../components/PopUp/PopupList';
+import FixedSiderbar from "../common/FiexDiderbar/FixedSiderbar";
 
 const Main = () => {
   const [category, setCategory] = useState("추석선물세트");
@@ -61,6 +62,7 @@ const Main = () => {
       <SpeacilDeals>추석특가</SpeacilDeals>
       <Suggest list={CateogryFilter}>
       </Suggest>
+      <FixedSiderbar />
       <Footer/>
     </>
   );

@@ -11,6 +11,8 @@ import {
 } from "../../components/CustomerService/Style.jsx";
 import { UlWrapper } from "../../components/CustomerService/FaqBoard.jsx";
 import PickBox from "../../components/Mypage/PickBox.jsx";
+import FixedSiderbar from "../../common/FiexDiderbar/FixedSiderbar.jsx";
+import Footer from "../../common/Footer/Footer.jsx";
 
 
 const Pick = () => {
@@ -37,6 +39,8 @@ const Pick = () => {
         </UlWrapper>
         </Container>
         </FlexWrapper>
+        <FixedSiderbar />
+        <Footer />
         </>
     )
 }

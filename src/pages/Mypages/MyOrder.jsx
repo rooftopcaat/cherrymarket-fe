@@ -11,13 +11,18 @@ import {
 } from "../../components/CustomerService/Style.jsx";
 import { UlWrapper } from "../../components/CustomerService/FaqBoard.jsx";
 import OrderBox from "../../components/Mypage/OrderBox.jsx";
+import FixedSiderbar from "../../common/FiexDiderbar/FixedSiderbar.jsx";
+import Footer from "../../common/Footer/Footer.jsx";
+import styled from "styled-components";
 
-const OrderDetail = () => {
+
+const MyOrder = () => {
 
 
     return (
 <>
     <Header />
+    <MainDiv>
     <Mypage />
     <FlexWrapper>
     <MypageMenu />
@@ -35,10 +40,18 @@ const OrderDetail = () => {
     </UlWrapper>
     </Container>
     </FlexWrapper>
+    <FixedSiderbar />
+    </MainDiv>
+    <Footer />
 </>
 
     );
 }
 
-export default OrderDetail;
+export default MyOrder;
+
+const MainDiv = styled.div`
+position: relative;
+    min-width: 1050px;
+`;
 

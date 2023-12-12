@@ -29,15 +29,20 @@ import jwtDecode from "jwt-decode";
 import { instance } from "../../redux/modules/instance";
 import { IoPersonCircleOutline } from "react-icons/io5";
 
+
+
 const Header = () => {
   const [showFixedHeader, setShwoFixedHeader] = useState(false);
+  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const userData = useSelector((state) => state.login.user);
+  
 
-  let userData = [];
   if (localStorage.token) {
     const token = localStorage.getItem("token");
     instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     userData = jwtDecode(localStorage.token);
   }
+
 
   const dispatch = useDispatch();
 
@@ -56,7 +61,7 @@ const Header = () => {
   }, [showFixedHeader]);
 
   useEffect(() => {
-    if (userData.nickName) {
+    if (userData.userName) {
       dispatch(getCartAysnc());
     }
   }, []);
@@ -64,14 +69,14 @@ const Header = () => {
   const onLogOut = useCallback(() => {
     localStorage.clear();
     window.location.reload();
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
       <Headercoupon />
       <HeadTop>
         <UserHead>
-          {!userData.nickName ? (
+          {!isLoggedIn ? (
             <>
               <HeadUserLink to="/join">회원가입</HeadUserLink>
               <HeadeVertical />
@@ -81,7 +86,7 @@ const Header = () => {
             </>
           ) : (
             <>
-              <HeadUserLink to="/">{userData.nickName}님</HeadUserLink>
+              <HeadUserLink to="/">{userData?.nickName}님</HeadUserLink>
               <HeadeVertical />
 
               <HeadLogOut onClick={onLogOut}>로그아웃</HeadLogOut>
@@ -89,7 +94,7 @@ const Header = () => {
           )}
           <HeadeVertical />
           <ServiceCenter>
-            <HeadUserLink to="/" style={{ color: "inherit" }}>
+            <HeadUserLink to="/notice" style={{ color: "inherit" }}>
               고객센터
               <ServiceIcon />
               <ServiceNav>

@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import Header from "../../common/Header/Header";
 import './Mypage.css'
+import FixedSiderbar from "../../common/FiexDiderbar/FixedSiderbar";
 
 
 const Mypage = () => {
@@ -118,6 +119,7 @@ const Mypage = () => {
                         </a>
                     </div>
                 </div>
+                <FixedSiderbar  />
             </div>
         </>
     )

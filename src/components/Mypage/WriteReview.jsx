@@ -48,7 +48,7 @@ const WriteReview = () => {
 
 export default WriteReview;
 
-const Div1 = styled.div`
+export const Div1 = styled.div`
 position: relative;
     width: 100%;
     min-height: 600px;
@@ -92,7 +92,7 @@ margin-left: 11px;
 background-color: transparent;
 `;
 
-const CountSpan = styled.span`
+export const CountSpan = styled.span`
 position: absolute;
     top: -38px;
     left: 0px;
@@ -101,7 +101,7 @@ position: absolute;
     line-height: 17px;
 `;
 
-const GuideBtn = styled.button`
+export const GuideBtn = styled.button`
 position: absolute;
 top: -38px;
 right: 3px;
@@ -117,7 +117,7 @@ color: rgb(153, 153, 153);
 background-color: transparent;
 `;
 
-const GuideIcon = styled.span`
+export const GuideIcon = styled.span`
 display: inline-block;
 width: 20px;
 height: 20px;

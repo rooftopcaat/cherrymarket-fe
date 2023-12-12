@@ -12,44 +12,40 @@ import googleIcon from "../../assets/googleIcon.png";
 
 
 function LoginForm() {
-  const nav = useNavigate();
-  const dispatch = useDispatch();
 
-  const [userId, onIdHandler] = useInput("");
-  const [password, onPasswordHandler] = useInput("");
+const nav = useNavigate();
+const dispatch = useDispatch();
 
-  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+const [email, onIdHandler] = useInput("");
+const [password, onPasswordHandler] = useInput("");
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    if (userId === "" || password === "") {
-      alert("아이디 혹은 비밀번호를 입력해주세요");
-      return;
-    }
-    dispatch(loginThunk({ userId, password }));
-    if (isLoggedIn) {
-      nav("/");
-    }
-  };
+const isLoggedIn = useSelector((state => state.login.isLoggedIn));
 
-  // const naverLogin = () => {
+const submitHandler = (e) => {
+  e.preventDefault();
+  if (email === "" || password === "") {
+    alert("아이디 혹은 비밀번호를 입력해주세요");
+    return;
+  }
 
-  // };
+  // loginThunk 액션을 디스패치합니다.
+  dispatch(loginThunk({ email, password }));
+};
 
-  // const kakaoLogin = () => {
+// 로그인 상태(isLoggedIn)가 업데이트 되면, 메인 페이지로 리디렉트 합니다.
+useEffect(() => {
+  if (isLoggedIn) {
+    nav("/");
+  }
+}, [isLoggedIn, nav]);
 
-  // };
-
+// 로컬 스토리지에 토큰이 있으면 메인 페이지로 이동합니다.
+useEffect(() => {
   const loginCheck = localStorage.getItem("token");
-  // console.log(loginCheck);
-
-  // 로컬스토리지에 토큰이 있으면 메인페이지로 이동
-
-  useEffect(() => {
-    if (loginCheck) {
-      nav("/");
-    }
-  }, [loginCheck]);
+  if (loginCheck) {
+    nav("/");
+  }
+}, [nav]);
 
   return (
     <Container>
@@ -63,8 +59,8 @@ function LoginForm() {
                 fontSize="14px"
                 placeholder="아이디를 입력해주세요"
                 type="text"
-                name="userId"
-                value={userId}
+                name="email"
+                value={email}
                 onChange={onIdHandler}
               />
             </InputWrapper>

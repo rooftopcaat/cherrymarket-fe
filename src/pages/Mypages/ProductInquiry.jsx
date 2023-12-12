@@ -2,10 +2,6 @@ import MypageMenu from "../../components/Mypage/MypageMenu.jsx";
 import Header from "../../common/Header/Header.jsx";
 import Mypage from "./Mypage.jsx";
 import {
-  Title,
-  TitleHead,
-  TitleSpan,
-  TitleWraper,
   FlexWrapper,
   Container,
   SubTitle,
@@ -17,6 +13,8 @@ import {
 } from "../../components/CustomerService/QnaBoard.jsx";
 import styled from "styled-components";
 import ProductInquiryBox from "../../components/Mypage/ProductInpquryBox.jsx";
+import FixedSiderbar from "../../common/FiexDiderbar/FixedSiderbar.jsx";
+import Footer from "../../common/Footer/Footer.jsx";
 
 const ProductInquiry = () => {
   return (
@@ -28,9 +26,10 @@ const ProductInquiry = () => {
         <Container>
           <TitleWraper>
             <Title>
-              <TitleHead>상품문의</TitleHead>
+              <TitleLastDiv>
+              <Span>상품문의</Span>
+              </TitleLastDiv>
             </Title>
-            <br />
             <TitleUl>
               <TitleLi>
                 상품에 대한 문의를 남기는 공간입니다. 해당 게시판의 성격과 다른
@@ -52,31 +51,66 @@ const ProductInquiry = () => {
           </UlWrapper>
         </Container>
       </FlexWrapper>
+      <FixedSiderbar />
+      <Footer />
     </>
   );
 };
 
 export default ProductInquiry;
 
+const TitleWraper = styled.div`
+  margin-bottom: 20px;
+`;
+
+const Title = styled.div`
+display: flex;
+flex-direction: row;
+-webkit-box-align: center;
+align-items: center;
+-webkit-box-pack: justify;
+justify-content: space-between;
+`;
+
+const TitleLastDiv = styled.div`
+display: flex;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+`;
+
+
+const Span = styled.span`
+font-weight: 500;
+font-size: 24px;
+color: rgb(51, 51, 51);
+letter-spacing: -0.5px;
+line-height: 48px;
+`;
+
 const TitleUl = styled.ul`
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  padding-inline-start: 40px;
-  margin-top: 20px;
-  margin-bottom: 18px;
-  font-size: 14px;
-  line-height: 24px;
-  font-weight: 400;
-  color: rgb(153, 153, 153);
+margin-top: 20px;
+margin-bottom: 18px;
+font-size: 14px;
+line-height: 24px;
+font-weight: 400;
+color: rgb(153, 153, 153);
+list-style-type: none;
 `;
 
 const TitleLi = styled.li`
   padding-left: 12px;
   display: list-item;
   text-align: -webkit-match-parent;
+
+  &::before {
+    display: inline-block;
+    width: 2px;
+    height: 2px;
+    margin: 11px 6px 0px -10px;
+    background: rgb(153, 153, 153);
+    vertical-align: top;
+    content: "";
 `;
 
 const A = styled.a`

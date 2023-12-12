@@ -23,7 +23,7 @@ const MypageMenu = () => {
             <li><a href = "/mypage/address">배송지관리</a></li>
             <li><a href = "/mypage/review">상품후기</a></li>
             <li><a href = "/mypage/inquiry/products">상품문의</a></li>
-            <li><a href = "">적립금</a></li>
+            <li><a href = "/mypage/point">적립금</a></li>
             <li><a href = "/mypage/coupon">쿠폰</a></li>
             <li><a href='/mypage/info'>개인정보수정</a></li>
         </Customerli>

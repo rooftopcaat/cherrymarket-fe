@@ -3,8 +3,12 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import App from "./App";
 import store from "./redux/store/store";
+import axios from "axios";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
+axios.defaults.baseURL = "https://server.marketcherry.store/api";
+axios.defaults.withCredentials = true;
 
 root.render(
   <Provider store={store}>

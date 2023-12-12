@@ -1,4 +1,5 @@
 
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function OrderBox() {
@@ -6,7 +7,9 @@ function OrderBox() {
       <ItemContainer>
         <Div1>
           <ItemSpan>2023.11.23</ItemSpan>
+          <Link to="/mypage/myorderdetail">
           <ItemA>주문내역상세보기</ItemA>
+          </Link>
         </Div1>
         <Div2>
           <Div3>
