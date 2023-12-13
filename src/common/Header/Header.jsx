@@ -28,48 +28,75 @@ import { getCartAysnc } from "../../redux/modules/cartSlice";
 import jwtDecode from "jwt-decode";
 import { instance } from "../../redux/modules/instance";
 import { IoPersonCircleOutline } from "react-icons/io5";
-
+import { initializeLogin } from '../../redux/modules/loginSlice.jsx';
+import axios from 'axios';
 
 
 const Header = () => {
-  const [showFixedHeader, setShwoFixedHeader] = useState(false);
+  const [showFixedHeader, setShowFixedHeader] = useState(false);
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
   const userData = useSelector((state) => state.login.user);
-  
-
-  if (localStorage.token) {
-    const token = localStorage.getItem("token");
-    instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    userData = jwtDecode(localStorage.token);
-  }
-
-
   const dispatch = useDispatch();
+  const [userName, setUserName] = useState('');
 
+  const access_token = sessionStorage.getItem('accessToken');
+  const baseUrl = process.env.REACT_APP_API;
+
+
+// async 함수 정의
+async function fetchData() {
+  
+  try {
+    const response = await axios.get(`${baseUrl}/account/my-info`, {
+      headers: {
+        'Authorization': `Bearer ${access_token}`,
+      }
+    });
+
+    const name = response.data.name;
+    setUserName(name);
+
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+fetchData();
+  
+  useEffect(() => {
+    // 세션 스토리지에서 'accessToken'이라는 키로 저장된 토큰을 확인합니다.
+    const token = sessionStorage.getItem("accessToken");
+    if (token) {
+      dispatch(initializeLogin());
+      console.log('헤더 함수 호출되나확인');
+      
+    }
+  }, [dispatch]);
+  
   const CartList = useSelector((state) => state?.cart?.cart?.cart);
-
+  
   useEffect(() => {
     function onScroll() {
       window.scrollY > 110
-        ? setShwoFixedHeader(true)
-        : setShwoFixedHeader(false);
+        ? setShowFixedHeader(true)
+        : setShowFixedHeader(false);
     }
     window.addEventListener("scroll", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);
     };
   }, [showFixedHeader]);
-
+  
   useEffect(() => {
     if (userData.userName) {
       dispatch(getCartAysnc());
     }
-  }, []);
-
+  }, [userData, dispatch]); // userData를 의존성 배열에 추가합니다.
+  
   const onLogOut = useCallback(() => {
-    localStorage.clear();
-    window.location.reload();
+    sessionStorage.clear(); // 로그아웃 시 세션 스토리지의 모든 데이터를 삭제합니다.
+    window.location.reload(); // 페이지를 새로고침합니다.
   }, [dispatch]);
+
 
   return (
     <>
@@ -86,7 +113,7 @@ const Header = () => {
             </>
           ) : (
             <>
-              <HeadUserLink to="/">{userData?.nickName}님</HeadUserLink>
+              <HeadUserLink to="/">{userName}님</HeadUserLink>
               <HeadeVertical />
 
               <HeadLogOut onClick={onLogOut}>로그아웃</HeadLogOut>

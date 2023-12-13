@@ -1,11 +1,13 @@
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
 import { GoPencil } from "react-icons/go";
 import styled from "styled-components";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const AddressBox = () => {
 
-    return (
 
+    return (
 
         <Li>
         <div style={{ display: "flex" }}>
@@ -34,7 +36,6 @@ const AddressBox = () => {
           </Info>
         </div>
       </Li>
-
 
     )
 }
