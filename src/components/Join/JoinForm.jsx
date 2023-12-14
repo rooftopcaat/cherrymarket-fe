@@ -34,7 +34,7 @@ function JoinForm() {
     address: "",
   });
 
-  const { userId, password, confirmPw, nickName, email, address } = userInfo;
+  const { name, userId, password, confirmPw, nickName, email, address } = userInfo;
   const handleInput = (e) => {
     const { name, value } = e.target;
     setUserInfo({ ...userInfo, [name]: value });
@@ -96,16 +96,16 @@ function JoinForm() {
     }
   };
 
-  // 닉네임 유효성 검증 이벤트함수
-  const nickNameValidation = () => {
-    if (nickNameRegEx.test(nickName)) {
-      setIsNickNameValid(true);
-      setNickNameRuleDesc("");
-    } else {
-      setIsNickNameValid(false);
-      setNickNameRuleDesc("4자 이상 5자이하의 한글/영문");
-    }
-  };
+  // // 닉네임 유효성 검증 이벤트함수
+  // const nickNameValidation = () => {
+  //   if (nickNameRegEx.test(nickName)) {
+  //     setIsNickNameValid(true);
+  //     setNickNameRuleDesc("");
+  //   } else {
+  //     setIsNickNameValid(false);
+  //     setNickNameRuleDesc("4자 이상 5자이하의 한글/영문");
+  //   }
+  // };
 
   // 이메일 유효성 검증 이벤트함수
   const emailValidation = () => {
@@ -196,6 +196,7 @@ function JoinForm() {
   const SubmitData = (e) => {
     e.preventDefault();
     if (
+      userInfo.name.length > 0 &&
       userInfo.address.length > 0 &&
       isIdValid &&
       isPwValid &&
@@ -204,7 +205,7 @@ function JoinForm() {
       isEmailValid === true
     ) {
       if (isIdUsable && isEmailUsable) {
-        dispatch(joinThunk({ userId, nickName, password, email, address }));
+        dispatch(joinThunk({ name, userId, nickName, password, email, address }));
       } else {
         alert("중복검사를 실시해주세요.");
       }
@@ -226,109 +227,19 @@ function JoinForm() {
       <StRow>
         <LabelWrapper>
           <label>
-            아이디
+            이름
             <span>*</span>
           </label>
         </LabelWrapper>
         <InputWrapper>
           <Input
             type="text"
-            name="userId"
-            value={userId}
+            name="name"
+            value={name}
             onChange={handleInput}
-            placeholder="아이디를 입력해주세요"
+            placeholder="이름을 입력해주세요"
             autoComplete="off"
-            onKeyUp={userIdValidation}
-            maxLength="9"
           />
-          <Validation>
-            <p>{idRuleDesc}</p>
-          </Validation>
-        </InputWrapper>
-        <BtnWrapper visibility="visible">
-          <Btn
-            type="button"
-            onClick={() => {
-              userIdCheck();
-            }}
-            disabled={isIdUsable}
-          >
-            중복확인
-          </Btn>
-        </BtnWrapper>
-      </StRow>
-      <StRow>
-        <LabelWrapper>
-          <label>
-            비밀번호
-            <span>*</span>
-          </label>
-        </LabelWrapper>
-
-        <InputWrapper>
-          <Input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleInput}
-            placeholder="비밀번호를 입력해주세요"
-            autoComplete="off"
-            onKeyUp={passwordValidation}
-            maxLength="21"
-          />
-          <Validation>
-            <p>{pwRuleDesc}</p>
-          </Validation>
-        </InputWrapper>
-        <BtnWrapper />
-      </StRow>
-      <StRow>
-        <LabelWrapper>
-          <label>
-            비밀번호확인
-            <span>*</span>
-          </label>
-        </LabelWrapper>
-
-        <InputWrapper>
-          <Input
-            type="password"
-            name="confirmPw"
-            value={confirmPw.value}
-            onChange={handleInput}
-            placeholder="비밀번호를 한번 더 입력해주세요"
-            autoComplete="off"
-            onKeyUp={confirmPwValidation}
-            maxLength="21"
-          />
-          <Validation>
-            <p>{ConfirmPwRuleDesc}</p>
-          </Validation>
-        </InputWrapper>
-        <BtnWrapper />
-      </StRow>
-      <StRow>
-        <LabelWrapper>
-          <label>
-            닉네임
-            <span>*</span>
-          </label>
-        </LabelWrapper>
-
-        <InputWrapper>
-          <Input
-            type="text"
-            name="nickName"
-            value={nickName.value}
-            onChange={handleInput}
-            placeholder="닉네임을 입력해주세요"
-            autoComplete="off"
-            onKeyUp={nickNameValidation}
-            maxLength="6"
-          />
-          <Validation>
-            <p>{nickNameRuleDesc}</p>
-          </Validation>
         </InputWrapper>
         <BtnWrapper />
       </StRow>
@@ -339,7 +250,6 @@ function JoinForm() {
             <span>*</span>
           </label>
         </LabelWrapper>
-
         <InputWrapper>
           <Input
             type="text"
@@ -373,6 +283,114 @@ function JoinForm() {
           </Modal>
         ) : null} */}
       </StRow>
+      <StRow>
+        <LabelWrapper>
+          <label>
+            비밀번호
+            <span>*</span>
+          </label>
+        </LabelWrapper>
+        <InputWrapper>
+          <Input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handleInput}
+            placeholder="비밀번호를 입력해주세요"
+            autoComplete="off"
+            onKeyUp={passwordValidation}
+            maxLength="21"
+          />
+          <Validation>
+            <p>{pwRuleDesc}</p>
+          </Validation>
+        </InputWrapper>
+        <BtnWrapper />
+      </StRow>
+      <StRow>
+        <LabelWrapper>
+          <label>
+            비밀번호확인
+            <span>*</span>
+          </label>
+        </LabelWrapper>
+        <InputWrapper>
+          <Input
+            type="password"
+            name="confirmPw"
+            value={confirmPw.value}
+            onChange={handleInput}
+            placeholder="비밀번호를 한번 더 입력해주세요"
+            autoComplete="off"
+            onKeyUp={confirmPwValidation}
+            maxLength="21"
+          />
+          <Validation>
+            <p>{ConfirmPwRuleDesc}</p>
+          </Validation>
+        </InputWrapper>
+        <BtnWrapper />
+      </StRow>
+      {/* <StRow>
+        <LabelWrapper>
+          <label>
+            아이디
+            <span>*</span>
+          </label>
+        </LabelWrapper>
+        <InputWrapper>
+          <Input
+            type="text"
+            name="userId"
+            value={userId}
+            onChange={handleInput}
+            placeholder="아이디를 입력해주세요"
+            autoComplete="off"
+            onKeyUp={userIdValidation}
+            maxLength="9"
+          />
+          <Validation>
+            <p>{idRuleDesc}</p>
+          </Validation>
+        </InputWrapper>
+        <BtnWrapper visibility="visible">
+          <Btn
+            type="button"
+            onClick={() => {
+              userIdCheck();
+            }}
+            disabled={isIdUsable}
+          >
+            중복확인
+          </Btn>
+        </BtnWrapper>
+      </StRow> */}
+      {/* <StRow>
+        <LabelWrapper>
+          <label>
+            닉네임
+            <span>*</span>
+          </label>
+        </LabelWrapper>
+
+        <InputWrapper>
+          <Input
+            type="text"
+            name="nickName"
+            value={nickName.value}
+            onChange={handleInput}
+            placeholder="닉네임을 입력해주세요"
+            autoComplete="off"
+            onKeyUp={nickNameValidation}
+            maxLength="6"
+          />
+          <Validation>
+            <p>{nickNameRuleDesc}</p>
+          </Validation>
+        </InputWrapper>
+        <BtnWrapper />
+      </StRow> */}
+
       <StRow>
         <LabelWrapper>
           <label>주소</label>
