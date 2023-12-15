@@ -19,12 +19,14 @@ import {
   BtnWrapper,
   Validation,
   SubmitBtnWrapper,
+  GenderWrapper,
 } from "./Style";
 import Agreement from "./Agreement";
 
 function JoinForm() {
   const dispatch = useDispatch();
   const nav = useNavigate();
+  const [gender, setGender] = useState("");
   const [userInfo, setUserInfo] = useState({
     userId: "",
     password: "",
@@ -34,7 +36,22 @@ function JoinForm() {
     address: "",
   });
 
-  const { name, userId, password, confirmPw, nickName, email, address } = userInfo;
+  const {
+    name,
+    userId,
+    password,
+    confirmPw,
+    nickName,
+    email,
+    address,
+    birthday,
+  } = userInfo;
+  const handleGenderChange = (event) => {
+    setGender(event.target.value);
+  };  
+  const handleBirthdayInput = (e) => {
+    setUserInfo({ ...userInfo, birthday: e.target.value });
+  };
   const handleInput = (e) => {
     const { name, value } = e.target;
     setUserInfo({ ...userInfo, [name]: value });
@@ -46,6 +63,7 @@ function JoinForm() {
   const passwordRegEx = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/; // Password >> 6~20글자 , 최소 1개 이상의 숫자 또는 특수문자 포함
   const nickNameRegEx = /^[가-힣a-zA-Z]{4,8}$/; // 닉네임 >> 한글 및 영문만 가능(4~8글자)
   const emailRegEx = /^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/; // 이메일 >>
+  const birthdayRegEx = /^[0-9]{4}\/[0-9]{2}\/[0-9]{2}$/; // 생년월일 >> 4자리 숫자/2자리 숫자/2자리 숫자
 
   // 인풋에 들어온 내용이 valid한가?(참/거짓)
   const [isIdValid, setIsIdValid] = useState(false);
@@ -53,6 +71,7 @@ function JoinForm() {
   const [isConfirmPwValid, setIsConfirmPwValid] = useState(false);
   const [isNickNameValid, setIsNickNameValid] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isBirthdayValid, setIsBirthdayValid] = useState(false);
 
   // 유효성 검증 문구를 보여주는 useState모음
   const [idRuleDesc, setIdRuleDesc] = useState("");
@@ -205,7 +224,9 @@ function JoinForm() {
       isEmailValid === true
     ) {
       if (isIdUsable && isEmailUsable) {
-        dispatch(joinThunk({ name, userId, nickName, password, email, address }));
+        dispatch(
+          joinThunk({ name, userId, nickName, password, email, address })
+        );
       } else {
         alert("중복검사를 실시해주세요.");
       }
@@ -224,6 +245,88 @@ function JoinForm() {
   // ! ------------ 여기부터 뷰 -----------------
   return (
     <div>
+      <StRow>
+        <LabelWrapper>
+          <label>
+            아이디
+            <span>*</span>
+          </label>
+        </LabelWrapper>
+        <InputWrapper>
+          <Input
+            type="text"
+            name="userId"
+            value={userId}
+            onChange={handleInput}
+            placeholder="아이디를 입력해주세요"
+            autoComplete="off"
+            onKeyUp={userIdValidation}
+            maxLength="9"
+          />
+          <Validation>
+            <p>{idRuleDesc}</p>
+          </Validation>
+        </InputWrapper>
+        <BtnWrapper visibility="visible">
+          <Btn
+            type="button"
+            onClick={() => {
+              userIdCheck();
+            }}
+            disabled={isIdUsable}
+          >
+            중복확인
+          </Btn>
+        </BtnWrapper>
+      </StRow>
+      <StRow>
+        <LabelWrapper>
+          <label>
+            비밀번호
+            <span>*</span>
+          </label>
+        </LabelWrapper>
+        <InputWrapper>
+          <Input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handleInput}
+            placeholder="비밀번호를 입력해주세요"
+            autoComplete="off"
+            onKeyUp={passwordValidation}
+            maxLength="21"
+          />
+          <Validation>
+            <p>{pwRuleDesc}</p>
+          </Validation>
+        </InputWrapper>
+        <BtnWrapper />
+      </StRow>
+      <StRow>
+        <LabelWrapper>
+          <label>
+            비밀번호확인
+            <span>*</span>
+          </label>
+        </LabelWrapper>
+        <InputWrapper>
+          <Input
+            type="password"
+            name="confirmPw"
+            value={confirmPw.value}
+            onChange={handleInput}
+            placeholder="비밀번호를 한번 더 입력해주세요"
+            autoComplete="off"
+            onKeyUp={confirmPwValidation}
+            maxLength="21"
+          />
+          <Validation>
+            <p>{ConfirmPwRuleDesc}</p>
+          </Validation>
+        </InputWrapper>
+        <BtnWrapper />
+      </StRow>
       <StRow>
         <LabelWrapper>
           <label>
@@ -283,88 +386,6 @@ function JoinForm() {
           </Modal>
         ) : null} */}
       </StRow>
-      <StRow>
-        <LabelWrapper>
-          <label>
-            비밀번호
-            <span>*</span>
-          </label>
-        </LabelWrapper>
-        <InputWrapper>
-          <Input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleInput}
-            placeholder="비밀번호를 입력해주세요"
-            autoComplete="off"
-            onKeyUp={passwordValidation}
-            maxLength="21"
-          />
-          <Validation>
-            <p>{pwRuleDesc}</p>
-          </Validation>
-        </InputWrapper>
-        <BtnWrapper />
-      </StRow>
-      <StRow>
-        <LabelWrapper>
-          <label>
-            비밀번호확인
-            <span>*</span>
-          </label>
-        </LabelWrapper>
-        <InputWrapper>
-          <Input
-            type="password"
-            name="confirmPw"
-            value={confirmPw.value}
-            onChange={handleInput}
-            placeholder="비밀번호를 한번 더 입력해주세요"
-            autoComplete="off"
-            onKeyUp={confirmPwValidation}
-            maxLength="21"
-          />
-          <Validation>
-            <p>{ConfirmPwRuleDesc}</p>
-          </Validation>
-        </InputWrapper>
-        <BtnWrapper />
-      </StRow>
-      {/* <StRow>
-        <LabelWrapper>
-          <label>
-            아이디
-            <span>*</span>
-          </label>
-        </LabelWrapper>
-        <InputWrapper>
-          <Input
-            type="text"
-            name="userId"
-            value={userId}
-            onChange={handleInput}
-            placeholder="아이디를 입력해주세요"
-            autoComplete="off"
-            onKeyUp={userIdValidation}
-            maxLength="9"
-          />
-          <Validation>
-            <p>{idRuleDesc}</p>
-          </Validation>
-        </InputWrapper>
-        <BtnWrapper visibility="visible">
-          <Btn
-            type="button"
-            onClick={() => {
-              userIdCheck();
-            }}
-            disabled={isIdUsable}
-          >
-            중복확인
-          </Btn>
-        </BtnWrapper>
-      </StRow> */}
       {/* <StRow>
         <LabelWrapper>
           <label>
@@ -390,8 +411,61 @@ function JoinForm() {
         </InputWrapper>
         <BtnWrapper />
       </StRow> */}
-
       <StRow>
+        <LabelWrapper>
+          <label>
+            생년월일
+            <span>*</span>
+          </label>
+        </LabelWrapper>
+        <InputWrapper>
+          <Input
+            type="text"
+            name="birthday"
+            value={birthday}
+            onChange={handleBirthdayInput}
+            placeholder="YYYY / MM / DD"
+            autoComplete="off"
+          />
+        </InputWrapper>
+        <BtnWrapper />
+      </StRow>
+      <StRow>
+        <StRow>
+          <LabelWrapper>
+            <label>
+              성별
+              <span>*</span>
+            </label>
+          </LabelWrapper>
+          <GenderWrapper>
+              <input
+                type="radio"
+                name="gender"
+                value="male"
+                onChange={handleGenderChange} // 여기서 handleGenderChange는 성별 변경을 처리하는 함수입니다.
+                checked={gender === "male"} // 'gender' 상태가 'male'이면 체크됩니다.
+              />{" "}
+              남자
+              <input
+                type="radio"
+                name="gender"
+                value="female"
+                onChange={handleGenderChange}
+                checked={gender === "female"}
+              />{" "}
+              여자
+              <input
+                type="radio"
+                name="gender"
+                value="none"
+                onChange={handleGenderChange}
+                checked={gender === "none"}
+              />{" "}
+              선택안함
+          </GenderWrapper>
+          <BtnWrapper />
+        </StRow>
         <LabelWrapper>
           <label>주소</label>
           <span>*</span>
@@ -410,7 +484,6 @@ function JoinForm() {
             />
             주소 검색
           </Btn>
-
           <Validation>
             <span>배송지에 따라 상품 정보가 달라질 수 있습니다.</span>
           </Validation>

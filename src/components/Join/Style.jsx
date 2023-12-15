@@ -53,3 +53,15 @@ export const SubmitBtnWrapper = styled.div`
   border-top: 1px solid rgb(247, 247, 247);
   padding: 40px 0px;
 `;
+
+export const GenderWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 20px;
+  & label {
+    color: rgb(51, 51, 51);
+    font-size: 12px;
+    line-height: 20px;
+  }
+`;
