@@ -2,44 +2,50 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-function OrderBox() {
+function OrderBox(props) {
+
+  console.log(props);
+  
+
   return (
       <ItemContainer>
         <Div1>
-          <ItemSpan>2023.11.23</ItemSpan>
+          <ItemSpan>{props.item.createdAt}</ItemSpan>
           <Link to="/mypage/myorderdetail">
           <ItemA>주문내역상세보기</ItemA>
           </Link>
         </Div1>
         <Div2>
           <Div3>
-            <Img src="https://product-image.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/product/image/8747602a-3efa-4bc3-a8ef-db74c41d1745.jpg"></Img>
+            <Img src={props.productImageUrl}></Img>
             <div style={{display:'flex', flexDirection:'column'}}>
             <Dl>
             <Dt>상품명</Dt>
-            <TitleDd>오뚜기 현미밥</TitleDd>
+            <TitleDd>{props.item.productName}</TitleDd>
             </Dl>
             <Dl>
               <Dt>주문번호</Dt>
-              <Dd>234234234234</Dd>
+              <Dd>{props.item.orderCode}</Dd>
             </Dl>
             <Dl>
               <Dt>결제방법</Dt>
-              <Dd>카카오페이</Dd>
+              <Dd>{props.item.paymentMethod}</Dd>
             </Dl>
             <Dl>
               <Dt>결제금액</Dt>
-              <Dd>200000</Dd>
+              <Dd>{props.item.amount}</Dd>
             </Dl>
             </div>
           </Div3>
 
           <Div4>
-              <Span>배송완료</Span>
+              <Span>{props.item.orderStatus}</Span>
               <div style={{width: '96px'}}>
+                <Link to ="/qna">
                 <Btn>
                   <span style={{fontSize:'12px', fontWeight: '500'}}>1:1 문의</span>
                 </Btn>
+                </Link>
               </div>
           </Div4>
         </Div2>
@@ -164,7 +170,8 @@ display: block;
     width: 100%;
     height: 36px;
     border-radius: 3px;
-    color: rgb(95, 0, 128);
+    color: rgb(149, 5, 38);
     background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(95, 0, 128);
+    border: 1px solid rgb(149, 5, 38);
+    cursor: pointer;
 `;

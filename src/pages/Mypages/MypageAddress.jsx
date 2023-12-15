@@ -15,8 +15,43 @@ import styled from "styled-components";
 import AddressBox from "../../components/Mypage/AddressBox.jsx";
 import FixedSiderbar from "../../common/FiexDiderbar/FixedSiderbar.jsx";
 import Footer from "../../common/Footer/Footer.jsx";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const MypageAddress = () => {
+
+  const [addressItem, setAddressItem] = useState([]);
+  const baseUrl = process.env.REACT_APP_API;
+  const access_token = sessionStorage.getItem("accessToken");
+
+  
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(`${baseUrl}/customer/address/my-list`, {
+          headers: {
+            'Authorization': `Bearer ${access_token}`,
+           
+          }
+        });
+       
+
+        setAddressItem(response.data);
+
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+    
+    fetchData();
+  }, [addressItem, access_token, baseUrl]);
+
+
+
+
+
+
+
   return (
     <>
       <Header />

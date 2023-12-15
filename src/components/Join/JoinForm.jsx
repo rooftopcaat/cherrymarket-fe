@@ -27,18 +27,14 @@ function JoinForm() {
   const nav = useNavigate();
   const [userInfo, setUserInfo] = useState({
     userId: "",
-    name: "",
     password: "",
     confirmPw: "",
-    gender: "",
     nickName: "",
     email: "",
-    birthdate: "",
-    contact: "",
     address: "",
   });
 
-  const { userId, name, password, confirmPw, nickName, email, gender, birthdate, contact, address } = userInfo;
+  const { name, userId, password, confirmPw, nickName, email, address } = userInfo;
   const handleInput = (e) => {
     const { name, value } = e.target;
     setUserInfo({ ...userInfo, [name]: value });
@@ -100,16 +96,16 @@ function JoinForm() {
     }
   };
 
-  // 닉네임 유효성 검증 이벤트함수
-  const nickNameValidation = () => {
-    if (nickNameRegEx.test(nickName)) {
-      setIsNickNameValid(true);
-      setNickNameRuleDesc("");
-    } else {
-      setIsNickNameValid(false);
-      setNickNameRuleDesc("4자 이상 5자이하의 한글/영문");
-    }
-  };
+  // // 닉네임 유효성 검증 이벤트함수
+  // const nickNameValidation = () => {
+  //   if (nickNameRegEx.test(nickName)) {
+  //     setIsNickNameValid(true);
+  //     setNickNameRuleDesc("");
+  //   } else {
+  //     setIsNickNameValid(false);
+  //     setNickNameRuleDesc("4자 이상 5자이하의 한글/영문");
+  //   }
+  // };
 
   // 이메일 유효성 검증 이벤트함수
   const emailValidation = () => {
@@ -174,7 +170,6 @@ function JoinForm() {
   const open = useDaumPostcodePopup(scriptUrl);
 
   const handleComplete = (data) => {
-    console.log(data);
     let fullAddress = data.address;
     let extraAddress = "";
 
@@ -201,6 +196,7 @@ function JoinForm() {
   const SubmitData = (e) => {
     e.preventDefault();
     if (
+      userInfo.name.length > 0 &&
       userInfo.address.length > 0 &&
       isIdValid &&
       isPwValid &&
@@ -209,7 +205,7 @@ function JoinForm() {
       isEmailValid === true
     ) {
       if (isIdUsable && isEmailUsable) {
-        dispatch(joinThunk({ email, password, address }));
+        dispatch(joinThunk({ name, userId, nickName, password, email, address }));
       } else {
         alert("중복검사를 실시해주세요.");
       }
@@ -228,6 +224,25 @@ function JoinForm() {
   // ! ------------ 여기부터 뷰 -----------------
   return (
     <div>
+      <StRow>
+        <LabelWrapper>
+          <label>
+            이름
+            <span>*</span>
+          </label>
+        </LabelWrapper>
+        <InputWrapper>
+          <Input
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleInput}
+            placeholder="이름을 입력해주세요"
+            autoComplete="off"
+          />
+        </InputWrapper>
+        <BtnWrapper />
+      </StRow>
       <StRow>
         <LabelWrapper>
           <label>
@@ -268,6 +283,54 @@ function JoinForm() {
           </Modal>
         ) : null} */}
       </StRow>
+      <StRow>
+        <LabelWrapper>
+          <label>
+            비밀번호
+            <span>*</span>
+          </label>
+        </LabelWrapper>
+        <InputWrapper>
+          <Input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handleInput}
+            placeholder="비밀번호를 입력해주세요"
+            autoComplete="off"
+            onKeyUp={passwordValidation}
+            maxLength="21"
+          />
+          <Validation>
+            <p>{pwRuleDesc}</p>
+          </Validation>
+        </InputWrapper>
+        <BtnWrapper />
+      </StRow>
+      <StRow>
+        <LabelWrapper>
+          <label>
+            비밀번호확인
+            <span>*</span>
+          </label>
+        </LabelWrapper>
+        <InputWrapper>
+          <Input
+            type="password"
+            name="confirmPw"
+            value={confirmPw.value}
+            onChange={handleInput}
+            placeholder="비밀번호를 한번 더 입력해주세요"
+            autoComplete="off"
+            onKeyUp={confirmPwValidation}
+            maxLength="21"
+          />
+          <Validation>
+            <p>{ConfirmPwRuleDesc}</p>
+          </Validation>
+        </InputWrapper>
+        <BtnWrapper />
+      </StRow>
       {/* <StRow>
         <LabelWrapper>
           <label>
@@ -302,148 +365,32 @@ function JoinForm() {
           </Btn>
         </BtnWrapper>
       </StRow> */}
-      <StRow>
+      {/* <StRow>
         <LabelWrapper>
           <label>
-            비밀번호
-            <span>*</span>
-          </label>
-        </LabelWrapper>
-        
-        <InputWrapper>
-          <Input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleInput}
-            placeholder="비밀번호를 입력해주세요"
-            autoComplete="off"
-            onKeyUp={passwordValidation}
-            maxLength="21"
-          />
-          <Validation>
-            <p>{pwRuleDesc}</p>
-          </Validation>
-        </InputWrapper>
-        <BtnWrapper />
-      </StRow>
-      <StRow>
-        <LabelWrapper>
-          <label>
-            비밀번호 확인
+            닉네임
             <span>*</span>
           </label>
         </LabelWrapper>
 
         <InputWrapper>
           <Input
-            type="password"
-            name="confirmPw"
-            value={confirmPw.value}
+            type="text"
+            name="nickName"
+            value={nickName.value}
             onChange={handleInput}
-            placeholder="비밀번호를 한번 더 입력해주세요"
+            placeholder="닉네임을 입력해주세요"
             autoComplete="off"
-            onKeyUp={confirmPwValidation}
-            maxLength="21"
+            onKeyUp={nickNameValidation}
+            maxLength="6"
           />
           <Validation>
-            <p>{ConfirmPwRuleDesc}</p>
+            <p>{nickNameRuleDesc}</p>
           </Validation>
         </InputWrapper>
         <BtnWrapper />
-      </StRow>
-      <StRow>
-        <LabelWrapper>
-          <label>
-            성별
-            <span>*</span>
-          </label>
-        </LabelWrapper>
+      </StRow> */}
 
-        <InputWrapper>
-          <div>
-            <input
-              type="radio"
-              id="male"
-              name="gender"
-              value="male"
-              checked={gender === "male"}
-              onChange={handleInput}
-            />
-            <label htmlFor="male">남자</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="female"
-              name="gender"
-              value="female"
-              checked={gender === "female"}
-              onChange={handleInput}
-            />
-            <label htmlFor="female">여자</label>
-          </div>
-        </InputWrapper>
-        <BtnWrapper />
-      </StRow>
-      <StRow>
-        <LabelWrapper>
-          <label>
-            이름
-            <span>*</span>
-          </label>
-        </LabelWrapper>
-        <InputWrapper>
-          <Input
-            type="text"
-            name="name"
-            value={name}
-            onChange={handleInput}
-            placeholder="이름을 입력해주세요"
-            autoComplete="off"
-          />
-        </InputWrapper>
-        <BtnWrapper />
-      </StRow>
-      <StRow>
-        <LabelWrapper>
-          <label>
-            휴대폰(연락처)
-            <span>*</span>
-          </label>
-        </LabelWrapper>
-        <InputWrapper>
-          <Input
-            type="text"
-            name="contact"
-            value={contact}
-            onChange={handleInput}
-            placeholder="휴대폰 번호를 입력해주세요"
-            autoComplete="off"
-          />
-        </InputWrapper>
-        <BtnWrapper />
-      </StRow>
-      <StRow>
-        <LabelWrapper>
-          <label>
-            생년월일
-            <span>*</span>
-          </label>
-        </LabelWrapper>
-        <InputWrapper>
-          <Input
-            type="text"
-            name="birthdate"
-            value={birthdate}
-            onChange={handleInput}
-            placeholder="YYYY / MM / DD"
-            maxLength={8}
-            autoComplete="off"
-          />
-        </InputWrapper>
-        <BtnWrapper />
-      </StRow>
       <StRow>
         <LabelWrapper>
           <label>주소</label>

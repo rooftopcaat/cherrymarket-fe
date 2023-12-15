@@ -7,6 +7,7 @@
 
 }
 .mypageContainer{
+    height: 369px;
     width: 100%;
     padding: 50px 0px;
     margin-bottom: -20px;
@@ -30,23 +31,6 @@
     background: rgb(255, 255, 255);
 }
 
-.userLevel{
-    min-width: 48px;
-    height: 48px;
-    display: flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
-    padding: 0px 5px;
-    border-radius: 100%;
-    font-weight: normal;
-    font-size: 14px;
-    text-align: center;
-    color: rgb(95, 0, 128);
-    border: 1px solid rgb(95, 0, 128);
-    background-color: rgb(255, 255, 255);
-}
 
 .userContainer{
     display: flex;

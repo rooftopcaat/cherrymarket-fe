@@ -14,6 +14,9 @@ import styled from 'styled-components';
 import CouponBox from '../../components/Mypage/CouponBox.jsx';
 import Footer from '../../common/Footer/Footer.jsx';
 import FixedSiderbar from "../../common/FiexDiderbar/FixedSiderbar.jsx";
+import { useEffect } from "react";
+import React, { useState } from 'react';
+import axios from "axios";
 
 
 const Coupon = () => {

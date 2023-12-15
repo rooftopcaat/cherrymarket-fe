@@ -50,7 +50,7 @@ export const ServiceNav = styled.div`
   position: absolute;
   right: 0px;
   top: 34px;
-  width: 102px;
+  width: 90px;
   padding: 3px 9px;
   border: 1px solid rgb(221, 221, 221);
   background-color: rgb(255, 255, 255);
@@ -217,4 +217,21 @@ export const HeadLogOut = styled.div`
 export const CustomerLink = styled(Link)`
 text-decoration: none;
 color: inherit;
+`;
+
+export const RatingIcon = styled.span`
+    display: inline-block;
+    min-width: 44px;
+    height: 16px;
+    margin-right: 6px;
+    padding: 0px 4px;
+    border-radius: 30px;
+    font-size: 10px;
+    line-height: 14px;
+    text-align: center;
+    letter-spacing: -0.3px;
+    vertical-align: 0px;
+    color: rgb(149, 5, 3);
+    border: 1px solid rgb(149, 5, 3);
+    background-color: rgb(255, 255, 255);
 `;

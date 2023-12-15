@@ -17,6 +17,7 @@ import {
   CartIconWrap,
   HeadLogOut,
   CustomerLink,
+  RatingIcon,
 } from "./styles";
 import Headercoupon from "./HeaderNav/Headercoupon";
 import logo from "./logo.svg";
@@ -43,7 +44,7 @@ const Header = () => {
   const baseUrl = process.env.REACT_APP_API;
 
 
-// async 함수 정의
+// async 함수 정의 
 async function fetchData() {
   
   try {
@@ -112,11 +113,41 @@ fetchData();
               </HeadUserLink>
             </>
           ) : (
-            <>
-              <HeadUserLink to="/">{userName}님</HeadUserLink>
-              <HeadeVertical />
+            <> 
+            <ServiceCenter>
+            <HeadUserLink to="/mypage/order" style={{ color: "inherit" }}>
+            <RatingIcon>일반</RatingIcon><span style={{color:'rgb(149, 5, 3)'}}>{userName}님</span>
+              <ServiceIcon />
+              <ServiceNav>
+              <CustomerLink to= "//mypage/order">
+                  <div>주문내역</div>
+                </CustomerLink>
+                <CustomerLink to= "/mypage/pick">
+                  <div>찜한상품</div>
+                </CustomerLink>
+                <CustomerLink to= "/mypage/address">
+                  <div>배송지관리</div>
+                </CustomerLink>
+                <CustomerLink to= "/mypage/review">
+                  <div>상품후기</div>
+                </CustomerLink>
+                <CustomerLink to= "/mypage/inquiry/products">
+                  <div>상품문의</div>
+                </CustomerLink>
+                <CustomerLink to= "/mypage/point">
+                  <div>적립금</div>
+                </CustomerLink>
+                <CustomerLink to= "/mypage/coupon">
+                  <div>쿠폰</div>
+                </CustomerLink>
+                <CustomerLink to= "/mypage/info">
+                  <div>개인정보수정</div>
+                </CustomerLink>
+                <HeadLogOut onClick={onLogOut} style={{color:'rgb(149, 5, 3)'}}>로그아웃</HeadLogOut>
+              </ServiceNav>
+            </HeadUserLink>
+          </ServiceCenter>
 
-              <HeadLogOut onClick={onLogOut}>로그아웃</HeadLogOut>
             </>
           )}
           <HeadeVertical />
@@ -163,11 +194,6 @@ fetchData();
                   </button>
                 </Link>
               </CartIconWrap>
-              <Link to="/mypage/order">
-                  <button>
-                  <IoPersonCircleOutline />
-                  </button>
-                </Link>
             </HeadRightContents>
           </HeadRight>
         </HeadMain>

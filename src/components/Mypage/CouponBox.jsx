@@ -3,34 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const CouponBox = () => {
-  const [couponData, setCouponData] = useState(null);
-  const access_token = sessionStorage.getItem('accessToken');
-  const baseUrl = process.env.REACT_APP_API;
 
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${baseUrl}/customer/coupon/list`, {
-          headers: {
-            "Authorization" : `Bearer ${access_token}`,
-          },
-        });
-
-      
-
-
-        setCouponData(response.data);
-        
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-
-    fetchData();
-  }, [access_token,baseUrl]);
-
-  console.log(couponData);
 
 
 
