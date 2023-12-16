@@ -43,9 +43,16 @@ export const emailCheckThunk = createAsyncThunk(
   "joinSlice/emailCheckThunk",
   async (payload, thunkAPI) => {
     try {
-      const response = await instance.post("/user/auth", {
-        key: "email",
-        value: payload,
+      const response = await instance.post("https://server.marketcherry.store/api/account/sign-up", {
+        "name": "김영희",
+        "email": "test1818@marketcherry.com",
+        "password": "Testuser12#",
+        "contact": "010-1234-5678",
+        "gender": "FEMALE",
+        "birthdate": "1990-01-01",
+        "serviceAgreement": true,
+        "privacyAgreement": true,
+        "marketingAgreement": true
       });
       return thunkAPI.fulfillWithValue(response.data); //thunkAPI를 이용해 통신 성공할 시 값 반환
     } catch (emailerror) {

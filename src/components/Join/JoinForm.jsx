@@ -23,6 +23,8 @@ import {
 import Agreement from "./Agreement";
 
 function JoinForm() {
+  const [gender, setGender] = useState('');
+  const [detailAddress, setDetailAddress] = useState("");
   const dispatch = useDispatch();
   const nav = useNavigate();
   const [userInfo, setUserInfo] = useState({
@@ -34,10 +36,20 @@ function JoinForm() {
     address: "",
   });
 
-  const { name, userId, password, confirmPw, nickName, email, address } = userInfo;
+  const { name, userId, password, confirmPw, nickName, email, address } =
+    userInfo;
   const handleInput = (e) => {
     const { name, value } = e.target;
     setUserInfo({ ...userInfo, [name]: value });
+  };
+
+  const handleDetailAddressChange = (e) => {
+    const { value } = e.target;
+    setDetailAddress(value);
+  };
+
+  const handleGenderChange = (event) => {
+    setGender(event.target.value);
   };
 
   // ! ------------ 여기부터 유효성 검사 로직 -----------------
@@ -96,17 +108,6 @@ function JoinForm() {
     }
   };
 
-  // // 닉네임 유효성 검증 이벤트함수
-  // const nickNameValidation = () => {
-  //   if (nickNameRegEx.test(nickName)) {
-  //     setIsNickNameValid(true);
-  //     setNickNameRuleDesc("");
-  //   } else {
-  //     setIsNickNameValid(false);
-  //     setNickNameRuleDesc("4자 이상 5자이하의 한글/영문");
-  //   }
-  // };
-
   // 이메일 유효성 검증 이벤트함수
   const emailValidation = () => {
     if (emailRegEx.test(email)) {
@@ -146,17 +147,7 @@ function JoinForm() {
       }
     }
   };
-  // const SendEamilAuth = () => {
-  //   if (email === "") {
-  //     alert("이메일 형식으로 입력해 주세요.");
-  //   } else {
-  //     if (isEmailValid) {
-  //       dispatch(emailAuthThunk(email));
-  //     } else {
-  //       alert(emailRuleDesc);
-  //     }
-  //   }
-  // };
+
   // 모달창 로직(기본값이 false, 버튼 클릭시 true로 변경되면서 팝업)
   const [modal, setModal] = useState(false);
 
@@ -185,6 +176,7 @@ function JoinForm() {
     }
 
     // console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+     fullAddress = fullAddress + detailAddress;
     setUserInfo({ ...userInfo, address: fullAddress }); // 가져온 fullAddress를 state에 저장!
   };
   const handleClick = () => {
@@ -205,7 +197,9 @@ function JoinForm() {
       isEmailValid === true
     ) {
       if (isIdUsable && isEmailUsable) {
-        dispatch(joinThunk({ name, userId, nickName, password, email, address }));
+        dispatch(
+          joinThunk({ name, userId, nickName, password, email, address })
+        );
       } else {
         alert("중복검사를 실시해주세요.");
       }
@@ -331,72 +325,38 @@ function JoinForm() {
         </InputWrapper>
         <BtnWrapper />
       </StRow>
-      {/* <StRow>
-        <LabelWrapper>
-          <label>
-            아이디
-            <span>*</span>
-          </label>
-        </LabelWrapper>
-        <InputWrapper>
-          <Input
-            type="text"
-            name="userId"
-            value={userId}
-            onChange={handleInput}
-            placeholder="아이디를 입력해주세요"
-            autoComplete="off"
-            onKeyUp={userIdValidation}
-            maxLength="9"
-          />
-          <Validation>
-            <p>{idRuleDesc}</p>
-          </Validation>
-        </InputWrapper>
-        <BtnWrapper visibility="visible">
-          <Btn
-            type="button"
-            onClick={() => {
-              userIdCheck();
-            }}
-            disabled={isIdUsable}
-          >
-            중복확인
-          </Btn>
-        </BtnWrapper>
-      </StRow> */}
-      {/* <StRow>
-        <LabelWrapper>
-          <label>
-            닉네임
-            <span>*</span>
-          </label>
-        </LabelWrapper>
-
-        <InputWrapper>
-          <Input
-            type="text"
-            name="nickName"
-            value={nickName.value}
-            onChange={handleInput}
-            placeholder="닉네임을 입력해주세요"
-            autoComplete="off"
-            onKeyUp={nickNameValidation}
-            maxLength="6"
-          />
-          <Validation>
-            <p>{nickNameRuleDesc}</p>
-          </Validation>
-        </InputWrapper>
-        <BtnWrapper />
-      </StRow> */}
 
       <StRow>
         <LabelWrapper>
-          <label>주소</label>
-          <span>*</span>
+          <label>
+            주소
+            <span>*</span>
+          </label>
         </LabelWrapper>
         <InputWrapper>
+          <Input
+            type="text"
+            name="address"
+            value={address}
+            onChange={handleInput}
+            placeholder="주소 검색을 해주세요"
+            autoComplete="off"
+            disabled
+          />
+            <Validation></Validation>
+          <Input
+          // type="text"
+          // name="detailAddress"
+          // value={detailAddress}
+          // onChange={handleInput}
+          placeholder="나머지 주소를 입력해주세요"
+          autoComplete="off"
+          />
+          <Validation>
+            <span>배송지에 따라 상품 정보가 달라질 수 있습니다.</span>
+          </Validation>
+        </InputWrapper>
+        <BtnWrapper visibility="visible">
           <Btn
             width="100%"
             fontSize="14px"
@@ -408,15 +368,75 @@ function JoinForm() {
               src="https://res.kurly.com/pc/service/cart/2007/ico_search.svg"
               alt="돋보기"
             />
-            주소 검색
+            주소검색
           </Btn>
-
-          <Validation>
-            <span>배송지에 따라 상품 정보가 달라질 수 있습니다.</span>
-          </Validation>
-        </InputWrapper>
-        <BtnWrapper />
+        </BtnWrapper>
+        {/* --------- 모달창 ------------- */}
+        {/* {modal ? (
+          <Modal modal={modal} setModal={setModal}>
+            {emailRuleDesc}
+          </Modal>
+        ) : null} */}
       </StRow>
+      <StRow>
+  <LabelWrapper>
+    <label>성별
+    <span>*</span>
+    </label>
+    
+  </LabelWrapper>
+  <InputWrapper>
+    <RadioLabel>
+      <RadioInput
+        type="radio"
+        name="gender"
+        value="male"
+        checked={gender === 'male'}
+        onChange={handleGenderChange}
+      />
+       <CheckBoxSpan>
+      <CheckBoxDiv></CheckBoxDiv>
+      </CheckBoxSpan>
+      &nbsp;&nbsp;&nbsp;남자
+    </RadioLabel>
+    <RadioLabel>
+      <RadioInput
+        type="radio"
+        name="gender"
+        value="female"
+        checked={gender === 'female'}
+        onChange={handleGenderChange}
+      />
+      <CheckBoxSpan>
+      <CheckBoxDiv></CheckBoxDiv>
+      </CheckBoxSpan>
+      &nbsp;&nbsp;&nbsp;여자
+    </RadioLabel>
+  </InputWrapper>
+</StRow>
+<StRow>
+  <LabelWrapper>
+    <label>
+      생년월일
+      <span>*</span>
+    </label>
+  </LabelWrapper>
+  <InputWrapper>
+    <Input
+      type="text"
+      name="birthdate"
+      //value={birthdate}
+      onChange={handleInput}
+      placeholder="YYYY - MM - DD"
+      autoComplete="off"
+      maxLength={10}
+    />
+              <Validation>
+            <span> - 포함 10글자 입력해주세요</span>
+          </Validation>
+  </InputWrapper>
+  <BtnWrapper />
+</StRow>
       <Line />
       <Agreement />
       <SubmitBtnWrapper>
@@ -447,4 +467,55 @@ const SearchImg = styled.img`
   height: 20px;
   margin-right: 4px;
   vertical-align: middle;
+`;
+
+const RadioLabel = styled.label`
+/* 라디오 버튼 스판(span)의 기본 스타일 */
+position: relative;
+display: flex;
+-webkit-box-align: center;
+align-items: center;
+padding: 12px 0px 9px;
+margin-right: 20px; /* 라디오 버튼 간격 */
+cursor: pointer;
+
+/* 선택된 라디오 버튼의 스판(span) 스타일 */
+input[type="radio"]:checked + span {
+  background-color: rgb(95, 0, 128); /* 선택된 상태일 때 배경색을 노란색으로 변경 */
+}
+`;
+
+const RadioInput = styled.input`
+/* 라디오 버튼의 인풋(input) 요소 스타일 (숨겨진 스타일) */
+overflow: hidden;
+position: absolute;
+width: 1px;
+height: 1px;
+clip: rect(0px, 0px, 0px, 0px);
+margin-right: 10px; /* 라디오 버튼과 텍스트 간격 */
+    
+`;
+
+const CheckBoxSpan = styled.span`
+/* 라디오 버튼 스판(span)의 스타일 */
+min-width: 24px;
+min-height: 24px;
+display: inline-block;
+position: relative;
+border-radius: 50%;
+
+ /* 기본 배경색 */
+background-color: white;
+    border: 1px solid rgb(221, 221, 221);
+`;
+
+const CheckBoxDiv = styled.div`
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: white;
 `;

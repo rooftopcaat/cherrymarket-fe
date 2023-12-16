@@ -1,8 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import { ReactComponent as Checkbox } from "./checkbox.svg";
+import { useState } from "react";
 
 function Agreement() {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxClick = () => {
+    // isChecked 상태를 토글 (true -> false, false -> true)
+    setIsChecked(!isChecked);
+  };
+
   return (
     <AgreementSection>
       <div>
@@ -14,7 +22,11 @@ function Agreement() {
       <div>
         <AgreeAll>
           <label>
-            <CheckboxInput type="checkbox" />
+          <CheckboxInput
+              type="checkbox"
+              checked={isChecked}
+              onClick={handleCheckboxClick}
+            />
             <ImageWrapper>
               <Checkbox />
             </ImageWrapper>
@@ -28,7 +40,11 @@ function Agreement() {
         <AgreeOneItem>
           <div>
             <label>
-              <CheckboxInput type="checkbox" />
+            <CheckboxInput
+              type="checkbox"
+              checked={isChecked}
+              onClick={handleCheckboxClick}
+            />
               <ImageWrapper>
                 <Checkbox />
               </ImageWrapper>
@@ -41,7 +57,11 @@ function Agreement() {
         <AgreeOneItem>
           <div>
             <label>
-              <CheckboxInput type="checkbox" />
+            <CheckboxInput
+              type="checkbox"
+              checked={isChecked}
+              onClick={handleCheckboxClick}
+            />
               <ImageWrapper>
                 <Checkbox />
               </ImageWrapper>
@@ -54,7 +74,11 @@ function Agreement() {
         <AgreeOneItem>
           <div>
             <label>
-              <CheckboxInput type="checkbox" />
+            <CheckboxInput
+              type="checkbox"
+              checked={isChecked}
+              onClick={handleCheckboxClick}
+            />
               <ImageWrapper>
                 <Checkbox />
               </ImageWrapper>
@@ -67,7 +91,11 @@ function Agreement() {
         <AgreeOneItem>
           <div>
             <label>
-              <CheckboxInput type="checkbox" />
+            <CheckboxInput
+              type="checkbox"
+              checked={isChecked}
+              onClick={handleCheckboxClick}
+            />
               <ImageWrapper>
                 <Checkbox />
               </ImageWrapper>
@@ -131,6 +159,11 @@ const CheckboxInput = styled.input`
   clip-path: inset(50%);
   width: 1px;
   height: 1px;
+
+   &:checked + div {
+    background-color: blue; // 선택된 상태의 배경색을 파란색으로 설정
+  }
+  }
 `;
 const ImageWrapper = styled.div`
   display: inline-block;
