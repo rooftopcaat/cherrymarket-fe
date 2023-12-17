@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { H3, TitleContainer } from './Style.jsx';
 
-const PatmentBox = () => {
+const PatmentBox = (props) => {
+
+    const item = props.paymentDetail;
 
   return (
     <>
@@ -11,19 +13,11 @@ const PatmentBox = () => {
     <Ul>
         <Li>
             <TitleSapn>상품금액</TitleSapn>
-            <PriceSpan>32,800원</PriceSpan>
+            <PriceSpan>{item.totalAmount-item.deliveryFee}원</PriceSpan>
         </Li>
         <Li>
             <TitleSapn>배송비</TitleSapn>
-            <PriceSpan>0원</PriceSpan>
-        </Li>
-        <Li>
-            <TitleSapn>쿠폰할인</TitleSapn>
-            <PriceSpan>-7000원</PriceSpan>
-        </Li>
-        <Li>
-            <TitleSapn>카드즉시할인</TitleSapn>
-            <PriceSpan>0원</PriceSpan>
+            <PriceSpan>{item.deliveryFee}원</PriceSpan>
         </Li>
         <Li>
             <TitleSapn>적립금</TitleSapn>
@@ -31,7 +25,7 @@ const PatmentBox = () => {
         </Li>
         <Li>
             <TitleSapn>결제금액</TitleSapn>
-            <PriceSpan>25,800원</PriceSpan>
+            <PriceSpan>{item.totalAmount}원</PriceSpan>
         </Li>
         <Li>
             <TitleSapn>적립금액</TitleSapn>
@@ -40,7 +34,7 @@ const PatmentBox = () => {
         </Li>
         <Li>
             <TitleSapn>결제방법</TitleSapn>
-            <PriceSpan>카카오페이(카카오페이머니)</PriceSpan>
+            <PriceSpan>{item.method}</PriceSpan>
         </Li>
     </Ul>
     

@@ -10,16 +10,24 @@ import DelivertInfoBox from './DeliveryInfoBox';
 import AddInfo from './AddInfo.jsx';
 
 
-const ProductDetail = () => {
+const ProductDetail = ({goodsDetails, orderCode}) => {
+
+  const goodsDeItem = goodsDetails.goodsDetailsInfo;
+  const orderStatus = goodsDetails.shippingDetailsInfo.shippingStatus;
+  
+  console.log(orderStatus);
+  console.log(goodsDeItem);
 
 
   return (
     <>
     <TitleContainer>
-        <H3>주문번호 <Span> 2321234234234234</Span></H3>
+        <H3>주문번호 <Span> {orderCode}</Span></H3>
         <Spna1>배송 또는 상품에 문제가 있나요?&nbsp;&nbsp;&nbsp;<A href='/qna'>1:1문의<StyledIcon /></A></Spna1>
     </TitleContainer>
-    <GoodsBox />
+     {goodsDeItem.map((item) => (
+       <GoodsBox key={item.id} item={item} orderStatus={orderStatus}/>
+     ))}
     <BtnContainer>
       <Bnt><BtnSpan>전체 상품 다시 담기</BtnSpan></Bnt>
       <Bnt style={{marginLeft:'12px'}}><BtnSpan>전체 상품 주문 취소</BtnSpan></Bnt>

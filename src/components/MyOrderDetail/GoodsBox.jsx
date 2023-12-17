@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 
-const  GoodsBox = () => {
+const  GoodsBox = (props) => {
+
+  console.log(props.item.goodsName);
+
 
   return (
     <>
@@ -11,13 +14,13 @@ const  GoodsBox = () => {
     <Container>
       <Img src='https://product-image.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/product/image/8747602a-3efa-4bc3-a8ef-db74c41d1745.jpg'></Img>
       <TitleDiv>
-        <A>[오뚜기] 오뮤 가뿐한끼 현미밥 150g X 30입</A>
+        <A>{props.item.goodsName}</A>
         <PriceDiv>
-          <PriceSpan>32,800원</PriceSpan>
-          <CountSpna>1개</CountSpna>
+          <PriceSpan>{props.item.price}원</PriceSpan>
+          <CountSpna>{props.item.quantity}개</CountSpna>
         </PriceDiv>
       </TitleDiv>
-      <StatusSpan>배송완료</StatusSpan>
+      <StatusSpan>{props.orderStatus}</StatusSpan>
       <BtnWapr>
       <Link to="/mypage/review">
         <ReviewBtn>

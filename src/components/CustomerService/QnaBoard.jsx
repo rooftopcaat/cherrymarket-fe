@@ -1,17 +1,45 @@
 import React from 'react';
 import Menu from './Menu';
 import styled from 'styled-components';
-import { FlexWrapper,
-        Container,
-        TitleWraper,
-        Title,
-        TitleHead,
-        SubTitle,
+import {
+    FlexWrapper,
+    Container,
+    TitleWraper,
+    Title,
+    TitleHead,
+    SubTitle,
 } from './Style';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
 
 const QnaBoard = () => {
-   
+
+    const access_token = sessionStorage.getItem('access_token');
+    const baseUrl = process.env.REACT_APP_API_URL;
+    useEffect(() => {
+        async function fetchData() {
+            try {
+            
+                // 요청 URL에 쿼리 문자열 추가
+                const response = await axios.get(`https://server.marketcherry.store/api/inquiry/list`, {
+                    headers: {
+                        'Authorization': `Bearer ${access_token}`,
+                    }
+                });
+
+                console.log("여기봐야함");
+                console.log(response);
+
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+        fetchData();
+    }, []);
+
+
 
     return (
         <>
@@ -23,12 +51,12 @@ const QnaBoard = () => {
                             <TitleHead>1:1 문의</TitleHead>
                         </Title>
                     </TitleWraper>
-                    <SubTitle>     
+                    <SubTitle>
                         <SubTitleLine>제목</SubTitleLine>
                         <SubTitleWriter>작성일</SubTitleWriter>
                         <SubTitleWriter>답변상태</SubTitleWriter>
                     </SubTitle>
-                                {/* {notices.map((notice) => (
+                    {/* {notices.map((notice) => (
                                     <tr key={notice.id}>
                                         <td>{notice.id}</td>
                                         <td>{notice.title}</td>
@@ -48,8 +76,8 @@ const QnaBoard = () => {
                     </ButtonWrapper>
 
                 </Container>
-            </FlexWrapper>  
-            
+            </FlexWrapper>
+
         </>
     );
 };
@@ -134,7 +162,7 @@ const InsertButton = styled.button`
     color: rgb(255, 255, 255);
     background-color: #950526;
     border: 0px none;
-`;  
+`;
 
 
 

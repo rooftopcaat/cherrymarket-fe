@@ -11,7 +11,7 @@ function OrderBox(props) {
       <ItemContainer>
         <Div1>
           <ItemSpan>{props.item.createdAt}</ItemSpan>
-          <Link to="/mypage/myorderdetail">
+          <Link to={`/mypage/myorderdetail/${props.item.orderCode}`}>
           <ItemA>주문내역상세보기</ItemA>
           </Link>
         </Div1>
@@ -49,7 +49,6 @@ function OrderBox(props) {
               </div>
           </Div4>
         </Div2>
-
       </ItemContainer>
   );
 }

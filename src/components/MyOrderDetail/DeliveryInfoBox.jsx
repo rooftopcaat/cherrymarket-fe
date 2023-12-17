@@ -1,8 +1,10 @@
 import { H3, OrderDetailLi, OrderDetailLiValueSpan, OrderDetailTitleSpan, OrderDetailUl, TitleContainer } from './Style.jsx';
 
 
-const OrderSender = () => {
+const DelivertInfoBox = (props) => {
 
+  const item = props.deliveryInfo;
+  console.log(item);
 
   return (
 
@@ -13,19 +15,19 @@ const OrderSender = () => {
     <OrderDetailUl>
       <OrderDetailLi>
         <OrderDetailTitleSpan>받는분</OrderDetailTitleSpan>
-        <OrderDetailLiValueSpan>김주영</OrderDetailLiValueSpan>
+        <OrderDetailLiValueSpan>{item.recipient}</OrderDetailLiValueSpan>
         </OrderDetailLi>
         <OrderDetailLi>
         <OrderDetailTitleSpan>핸드폰</OrderDetailTitleSpan>
-        <OrderDetailLiValueSpan>010-4288-****</OrderDetailLiValueSpan>
+        <OrderDetailLiValueSpan>{item.recipientContact}</OrderDetailLiValueSpan>
         </OrderDetailLi>
         <OrderDetailLi>
         <OrderDetailTitleSpan>주소</OrderDetailTitleSpan>
-        <OrderDetailLiValueSpan>(08773) 서울 관악구 남부순환로 170길 66-11 go 빌라 502호</OrderDetailLiValueSpan>
+        <OrderDetailLiValueSpan>({item.zipCode}) {item.address} {item.addressDetail}</OrderDetailLiValueSpan>
         </OrderDetailLi>
         <OrderDetailLi>
         <OrderDetailTitleSpan>받으실 장소</OrderDetailTitleSpan>
-        <OrderDetailLiValueSpan>문 앞</OrderDetailLiValueSpan>
+        <OrderDetailLiValueSpan>{item.place}</OrderDetailLiValueSpan>
         </OrderDetailLi>
         <OrderDetailLi>
         <OrderDetailTitleSpan>공동현관 비밀번호</OrderDetailTitleSpan>
@@ -46,4 +48,4 @@ const OrderSender = () => {
 
 }
 
-export default OrderSender;
+export default DelivertInfoBox;

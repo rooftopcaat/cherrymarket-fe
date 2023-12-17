@@ -6,29 +6,28 @@ import {
     GuideIcon,
 } from './WriteReview.jsx';
 
-const WrittenReview = () => {
 
+const WrittenReview = (props) => {
+
+    
     return (
         <>
-            <Div1>
-            <CountSpan>총 1개</CountSpan>
-            <GuideBtn><span>작성 시 유의사항</span><GuideIcon></GuideIcon></GuideBtn>
+ 
             <Div2>
                 <Div3>
                     <div style={{display:'flex', flexDirection: 'column'}}>
                         <A><TitleSpan>[kim`s butcher]맛있으면 0칼로리 삼겹살</TitleSpan></A>
-                        <DateDiv><DateSpan>2023.11.21 작성</DateSpan></DateDiv>
+                        <DateDiv><DateSpan>{props.item.createDate} 작성</DateSpan></DateDiv>
                     </div>
                 </Div3>
                 <UpdateBtn type='button'>후기수정</UpdateBtn>
                 <ContentDiv>
                     <div style={{boxSizing: 'border-box', margin:'0'}}>
-                        <ContentP>살이 하나도 안 찌는 맛이네요 좋네요</ContentP>
+                        <ContentP>{props.item.content}</ContentP>
                     </div>
                     <Div4></Div4>
                 </ContentDiv>
             </Div2>
-            </Div1>
 
         
         </>

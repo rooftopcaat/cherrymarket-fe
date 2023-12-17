@@ -51,7 +51,7 @@ const Router = () => {
           <Route path="/mypage/inquiry/products" element={<ProductInquiry />} />
           <Route path="/mypage/review" element={<Review />} />
           <Route path="/mypage/point" element={<Point />} />
-          <Route path="/mypage/myorderdetail" element={<MyOrderDetail />} />
+          <Route path="/mypage/myorderdetail/:orderCode" element={<MyOrderDetail />} />
           <Route path="/notice" element={<Notice />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/qna" element={<Qna />} />

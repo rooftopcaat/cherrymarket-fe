@@ -7,7 +7,7 @@ export const getCartAysnc = createAsyncThunk(
   "get/CartList",
   async (data, thunkAPI) => {
     try {
-      const res = await instance.get("/cart");
+      const res = await instance.get("/cart/refresh-available");
       return res.data;
     } catch (error) {
       console.error(error);

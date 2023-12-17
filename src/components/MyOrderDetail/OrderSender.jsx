@@ -3,7 +3,7 @@ import { H3, OrderDetailLi, OrderDetailLiValueSpan, OrderDetailTitleSpan, OrderD
 
 
 
-const OrderSender = () => {
+const OrderSender = (props) => {
 
 
    return (
@@ -14,15 +14,15 @@ const OrderSender = () => {
       <OrderDetailUl>
         <OrderDetailLi>
           <OrderDetailTitleSpan>주문번호</OrderDetailTitleSpan>
-          <OrderDetailLiValueSpan>232323232323</OrderDetailLiValueSpan>
+          <OrderDetailLiValueSpan>{props.orderCode}</OrderDetailLiValueSpan>
           </OrderDetailLi>
           <OrderDetailLi>
           <OrderDetailTitleSpan>보내는분</OrderDetailTitleSpan>
-          <OrderDetailLiValueSpan>김주영</OrderDetailLiValueSpan>
+          <OrderDetailLiValueSpan>{props.sender.name}</OrderDetailLiValueSpan>
           </OrderDetailLi>
           <OrderDetailLi>
           <OrderDetailTitleSpan>결제일시</OrderDetailTitleSpan>
-          <OrderDetailLiValueSpan>2023-11-28 19:59:25</OrderDetailLiValueSpan>
+          <OrderDetailLiValueSpan>{props.sender.approveAt}</OrderDetailLiValueSpan>
           </OrderDetailLi>
       </OrderDetailUl>
     
