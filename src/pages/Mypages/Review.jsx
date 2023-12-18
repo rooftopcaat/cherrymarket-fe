@@ -30,7 +30,7 @@ const Review = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get(`https://server.marketcherry.store/api/goods-review/list-my`, {
+        const response = await axios.get(`${baseUrl}/goods-review/list-my`, {
           headers: {
             'Authorization': `Bearer ${access_token}`,
           }
