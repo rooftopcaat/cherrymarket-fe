@@ -12,7 +12,7 @@ export function CheckoutPage() {
 
   useEffect(() => {
     (async () => {
-      const paymentWidget = await loadPaymentWidget("test_ck_oEjb0gm23PEvkNqZzjJ6VpGwBJn5",  ANONYMOUS); // 비회원 customerKey
+      const paymentWidget = await loadPaymentWidget("test_ck_nRQoOaPz8LN1nXR0LEyzVy47BMw6",  ANONYMOUS); // 비회원 customerKey
 
       if (paymentWidgetRef.current == null) {
         paymentWidgetRef.current = paymentWidget;

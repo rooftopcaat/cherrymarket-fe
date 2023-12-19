@@ -69,10 +69,8 @@ function JoinForm() {
   const [isEmailValid, setIsEmailValid] = useState(false);
 
   // 유효성 검증 문구를 보여주는 useState모음
-  const [idRuleDesc, setIdRuleDesc] = useState("");
   const [pwRuleDesc, setPwRuleDesc] = useState("");
   const [ConfirmPwRuleDesc, setConfirmPwRuleDesc] = useState("");
-  const [nickNameRuleDesc, setNickNameRuleDesc] = useState("");
   const [emailRuleDesc, setEmailRuleDesc] = useState("");
 
   // ID 유효성 검증 이벤트함수
@@ -143,9 +141,11 @@ function JoinForm() {
       alert("이메일 형식으로 입력해 주세요.");
     } else {
       if (isEmailValid) {
+        
         dispatch(emailCheckThunk(email));
+
       } else {
-        alert(emailRuleDesc);
+        alert("");
       }
     }
   };
@@ -263,11 +263,11 @@ function JoinForm() {
         <BtnWrapper visibility="visible">
           <Btn
             type="button"
-            // onClick={() => {
-            //   emailCheck();
-            //   // SendEamilAuth();
-            // }}
-            // disabled={isEmailUsable}
+            onClick={() => {
+              emailCheck();
+              // SendEamilAuth();
+            }}
+            disabled={isEmailUsable}
           >
             중복확인
           </Btn>
