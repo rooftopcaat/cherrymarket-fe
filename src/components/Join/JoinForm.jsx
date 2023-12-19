@@ -36,6 +36,9 @@ function JoinForm() {
     address: "",
   });
 
+
+
+
   const { name, userId, password, confirmPw, nickName, email, address } =
     userInfo;
   const handleInput = (e) => {
