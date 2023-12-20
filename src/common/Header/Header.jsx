@@ -74,6 +74,7 @@ fetchData();
   
   const CartList = useSelector((state) => state?.cart?.cart?.cart);
   
+  
   useEffect(() => {
     function onScroll() {
       window.scrollY > 110
@@ -86,10 +87,13 @@ fetchData();
     };
   }, [showFixedHeader]);
   
+  
   useEffect(() => {
     if (userData.userName) {
       dispatch(getCartAysnc());
     }
+  }, [userData, dispatch]); // userData를 의존성 배열에 추가합니다.
+  
   }, [userData, dispatch]); // userData를 의존성 배열에 추가합니다.
   
   const onLogOut = useCallback(() => {
@@ -97,6 +101,19 @@ fetchData();
     window.location.reload(); // 페이지를 새로고침합니다.
   }, [dispatch]);
 
+    sessionStorage.clear(); // 로그아웃 시 세션 스토리지의 모든 데이터를 삭제합니다.
+    window.location.reload(); // 페이지를 새로고침합니다.
+  }, [dispatch]);
+
+
+  const handleQnaClick = (e) => {
+    if (!isLoggedIn) {
+      e.preventDefault(); // 기본 링크 동작을 방지합니다.
+      alert('로그인 후 이용해주세요.'); // 알림을 표시합니다.
+      window.location.href = '/login'; // 로그인 페이지로 이동합니다.
+    }
+    // 로그인이 되어 있다면, 추가적인 조치는 필요하지 않습니다.
+  };
 
   return (
     <>
@@ -152,6 +169,7 @@ fetchData();
           <HeadeVertical />
           <ServiceCenter>
             <HeadUserLink to="/notice" style={{ color: "inherit" }}>
+            <HeadUserLink to="/notice" style={{ color: "inherit" }}>
               고객센터
               <ServiceIcon />
               <ServiceNav>
@@ -161,9 +179,17 @@ fetchData();
                 <CustomerLink to= "/faq">
                   <div>자주하는 질문</div>
                 </CustomerLink>
-                <CustomerLink to= "/qna">
-                  <div>1:1 문의</div>
-                </CustomerLink>
+                <>
+                  {!isLoggedIn ? (
+                    <CustomerLink to= "/login" onClick={handleQnaClick}>
+                      <div>1:1 문의</div>
+                    </CustomerLink>
+                  ) : (
+                    <CustomerLink to= "/qna">
+                      <div>1:1 문의</div>
+                    </CustomerLink>
+                  )}
+                </>
                 <div>대량주문 문의</div>
               </ServiceNav>
             </HeadUserLink>
@@ -171,7 +197,11 @@ fetchData();
         </UserHead>
         <HeadMain>
           <HeadLeft to="/">
-            <img src={logo} alt="마켓체리 로고" />
+            <img src={logo} alt="마켓체리 로고" style={{
+              width: '50px',
+              height: '80px',
+              marginBottom: '10px',
+            }}/>
             <LogoButton>마켓체리</LogoButton>
           </HeadLeft>
           <HeadCenter>
@@ -184,7 +214,10 @@ fetchData();
             <HeadRightContents>
             <CartIconWrap>
               </CartIconWrap>
+            <CartIconWrap>
+              </CartIconWrap>
               <div></div>
+              <button aria-label="찜하기" type="button"><Link to="/mypage/pick"></Link></button>
               <button aria-label="찜하기" type="button"><Link to="/mypage/pick"></Link></button>
               <CartIconWrap>
                 <Link to="/cart">
@@ -193,6 +226,11 @@ fetchData();
                   </button>
                 </Link>
               </CartIconWrap>
+              <Link to="/mypage/order">
+                  <button>
+                  <IoPersonCircleOutline />
+                  </button>
+                </Link>
             </HeadRightContents>
           </HeadRight>
         </HeadMain>

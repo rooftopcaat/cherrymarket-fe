@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Menu from './Menu';
 import styled from 'styled-components';
 import {
@@ -16,131 +16,132 @@ import axios from 'axios';
 
 
 
-
 const OPTIONS = [
-    { value: "문의유형을 선택해주세요", name: "문의유형을 선택해주세요" },
-    { value: "CANCEL", name: "CANCEL" },
-    { value: "MEMBER", name: "MEMBER" },
-    { value: "GOODS", name: "GOODS" },
-    { value: "DELIVERY", name: "DELIVERY" },
-    { value: "ORDER", name: "ORDER" },
-    { value: "SERVICE", name: "SERVICE" },
+    {value : "문의유형을 선택해주세요", name : "문의유형을 선택해주세요"},
+    {value : "CANCEL", name : "취소/교환/환불"},
+    {value : "MEMBER", name : "회원/이벤트/쿠폰"},
+    {value : "GOODS", name : "상품(식품/비식품/티켓"},
+    {value : "DELIVERY", name : "배송"},
+    {value : "ORDER", name : "주문/결제"},
+    {value : "SERVICE", name : "서비스/오류/기타"},
+
 ];
 
 
 const DETAIL_OPTIONS = {
-    "문의유형을 선택해주세요": [
-        { value: "상세유형을 선택해주세요", name: "상세유형을 선택해주세요" }
-    ],
-    "CANCEL": [
-        { value: "상세유형을 선택해주세요", name: "상세유형을 선택해주세요" },
-        { value: "CANCEL", name: "CANCEL" },
-        { value: "EXCHANGE", name: "EXCHANGE" },
-        { value: "REFUND", name: "REFUND" },
-    ],
-    "MEMBER": [
-        { value: "상세유형을 선택해주세요", name: "상세유형을 선택해주세요" },
-        { value: "MEMBER_INFO", name: "MEMBER_INFO" },
-        { value: "POINT", name: "POINT" },
-        { value: "COUPON", name: "COUPON" },
-    ],
-    "GOODS": [
-        { value: "상세유형을 선택해주세요", name: "상세유형을 선택해주세요" },
-        { value: "PRODUCT_QUALITY", name: "PRODUCT_QUALITY" },
-        { value: "FOREIGN_SUBSTANCE", name: "FOREIGN_SUBSTANCE" },
-        { value: "PRODUCT_INFO", name: "PRODUCT_INFO" },
-    ],
-    "DELIVERY": [
-        { value: "상세유형을 선택해주세요", name: "상세유형을 선택해주세요" },
-        { value: "DIFFERENT_PRODUCT_RECEIPT", name: "DIFFERENT_PRODUCT_RECEIPT" },
-        { value: "UNRECEIVED_PRODUCT", name: "UNRECEIVED_PRODUCT" },
-        { value: "DELIVERY_IMPROVEMENT", name: "DELIVERY_IMPROVEMENT" },
-        { value: "DELIVERY_SCHEDULE_INFO", name: "DELIVERY_SCHEDULE_INFO" }
-    ],
-    "ORDER": [
-        { value: "상세유형을 선택해주세요", name: "상세유형을 선택해주세요" },
-        { value: "INFO_CHANGE", name: "INFO_CHANGE" },
-        { value: "ORDER_HISTORY_RECEIPT", name: "ORDER_HISTORY_RECEIPT" },
-        { value: "ORDER_PAYMENT_METHOD", name: "ORDER_PAYMENT_METHOD" },
-    ],
-    "SERVICE": [
-        { value: "SYSTEM_ERROR", name: "SYSTEM_ERROR" },
-        { value: "OTHER", name: "OTHER" },
-        { value: "SERVICE_SUGGESTION", name: "SERVICE_SUGGESTION" }
-    ]
+        
+    "CANCEL": {
+        "상세유형을 선택해주세요": "상세유형을 선택해주세요",
+        "CANCEL": "취소",
+        "EXCHANGE": "교환",
+        "REFUND": "환불",
+        // 다른 상세 옵션들...
+    },
+    "MEMBER": {
+        "MEMBER_INFO": "회원 정보",
+        "POINT": "포인트 문의",
+        "COUPON": "쿠폰 문의",
+        // 다른 상세 옵션들...
+    },
+    "GOODS": {
+        "PRODUCT_QUALITY": "상품 품질",
+        "FOREIGN_SUBSTANCE": "이물질 발견",
+        "PRODUCT_INFO": "상품 정보",
+        // 다른 상세 옵션들...
+    },
+    "DELIVERY": {
+        "DIFFERENT_PRODUCT_RECEIPT" :  "다른 상품 수령", 
+        "UNRECEIVED_PRODUCT" : "상품 미수령",
+        "DELIVERY_IMPROVEMENT" : "배송/포장개선요청",
+        "DELIVERY_SCHEDULE_INFO" : "배송일정/정보",
+    },
+    "ORDER": {
+        "INFO_CHANGE" : "정보변경(주소/출입방법)" ,
+        "ORDER_HISTORY_RECEIPT" : "주문내역/영수증 발급" ,
+        "ORDER_PAYMENT_METHOD" : "주문/결제방법", 
+    },
+    "SERVICE": {
+        "SYSTEM_ERROR" : "시스템 오류/장애",
+        "OTHER" : "기타(직접입력)",
+        "SERVICE_SUGGESTION" : "서비스 제안/개선", 
+    }
 };
 
 
 
-const SelectBox = ({ options, selectedOption, setSelectedOption }) => {
-
+const SelectBox = ({options, selectedOption, setSelectedOption}) => {
+    
 
     const handleSelectChange = (event) => {
         setSelectedOption(event.target.value);
     };
     return (
         <DropdownContainer>
-            <StyledSelect
-                onChange={handleSelectChange}
-                value={selectedOption}
-            >
-                {options.map((option) => (
-                    <option key={option.value} value={option.value}
-                        disabled={option.value === "문의유형을 선택해주세요" && selectedOption !== "" && selectedOption !== "문의유형을 선택해주세요"}>
-                        {option.name}
-                    </option>
-                ))}
-            </StyledSelect>
-            <DropdownIcon />
-        </DropdownContainer>
-    );
-};
-
-const SelectDetailBox = ({optionsDetail, selectedOption, handleSelectDetailChange }) => {
-    return (
-        <DropdownContainer>
         <StyledSelect 
-            style={{ marginLeft : "20px" ,  opacity: selectedOption ? "1" : "0.3", pointerEvents: selectedOption ? "auto" : "none" }}
-            disabled={!selectedOption || selectedOption === "상세유형을 선택해주세요"}
-            onChange={handleSelectDetailChange}
+            onChange={handleSelectChange}
+            value={selectedOption}
         >
-          {optionsDetail.map((optionsDetail) => (
-            <option key={optionsDetail.value} value={optionsDetail.value}>
-              {optionsDetail.name}
+          {options.map((option) => (
+            <option key={option.value} value={option.value} 
+            disabled={option.value === "문의유형을 선택해주세요" && selectedOption !== "" && selectedOption !== "문의유형을 선택해주세요"}>
+              {option.name} 
             </option>
           ))}
         </StyledSelect>
+        <DropdownIcon />
+      </DropdownContainer>
+    );
+};  
+
+const SelectDetailBox = ({selectedOption, setDetailType}) => {
+    const [detailOptions, setDetailOptions] = useState([]);
+
+    useEffect(() => {
+        if(selectedOption && DETAIL_OPTIONS[selectedOption]) {
+            setDetailOptions(Object.entries(DETAIL_OPTIONS[selectedOption]));
+        } else {
+            setDetailOptions([]);
+        }
+    }, [selectedOption]);
+
+    const handleDetailChange = (event) => {
+        setDetailType(event.target.value);
+    };
+    return (
+        <DropdownContainer>
+        <StyledSelect disabled={!selectedOption || detailOptions.length === 0}
+        onChange={handleDetailChange}>
+                {detailOptions.length === 0 && <option>상세유형을 선택해주세요</option>}
+                {detailOptions.map(([value, name]) => (
+                    <option key={value} value={value}>{name}</option>
+                ))}
+        </StyledSelect>
         <DropdownIcon style={{
-            marginRight : "-10px",
+            marginRight : "-1px",
         }} />
       </DropdownContainer>
     );
 };  
 
 
-
-const QnaInsertBoard = () => {
+const QnaInsertBoard = () => {  
     const [clicked, setClicked] = useState(false);
     const [selectedOption, setSelectedOption] = useState("");
     const [title, setTitle] = useState("");
-    const [selectedDetailOption, setSelectedDetailOption] =
-        useState(DETAIL_OPTIONS["문의유형을 선택해주세요"] || "[]");
+    const [content, setContent] = useState("");
+    const [selectedDetailOption, setSelectedDetailOption] = 
+    useState(DETAIL_OPTIONS["문의유형을 선택해주세요"] || "[]");
     const [inquiryData, setInquiryData] = useState(null);
     const [detailOption, setDetailOption] = useState([]);
-    const [selectedQna, setSelectedQna] = useState({
-        type: "",
-        detailType: "",
-        subject: "",
-        content: "",
-    });
-
-    const { type, detailType, subject, content } = selectedQna;
-
+    const [detailType, setDetailType] = useState("");
+  
+    const handleDetailOption = (event) => {
+        setDetailOption(event.target.value);
+    };
     // insert
     const handleSubmit = async (event) => {
-       
         event.preventDefault();
-        if (!isFormValid()) {
+        if(!isFormValid()) {
             alert("모든 항목을 입력해주세요");
             return;
         }
@@ -148,23 +149,32 @@ const QnaInsertBoard = () => {
         try {
             const token = sessionStorage.getItem("accessToken");
             const config = {
-                headers: {
+                headers: { 
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
             };
             console.log("selectedOption", selectedOption);
-            console.log("selectedDetailOption", selectedDetailOption);
-
+            console.log("selectedDetailOption", detailType);
+            const inquiryData = {
+                // userId: null, // 현재 로그인한 사용자의 ID
+                // code: "001", // 코드 (상황에 따라 변경 가능)
+                type: selectedOption, // 선택된 문의 유형
+                detailType: detailType, // 선택된 상세 문의 유형
+                subject: title, // 제목
+                content: content, // 내용
+               
+            };
             setInquiryData(inquiryData);
-            await axios.post("https://server.marketcherry.store/api/inquiry/add", selectedQna ,  config);
+            await axios.post("https://server.marketcherry.store/api/inquiry/add", inquiryData, config);
             alert("문의가 등록되었습니다.");
+            window.location.href = "/qna";
         } catch (error) {
             console.error(error);
             console.log("inquiryData", inquiryData);
             alert("문의 등록에 실패했습니다.");
         }
-
+    
     }
 
     const handleSvgClick = () => {
@@ -173,46 +183,12 @@ const QnaInsertBoard = () => {
 
     const handleSelectChange = (selectedValue) => {
         setSelectedOption(selectedValue);
-        const details = DETAIL_OPTIONS[selectedValue] || [];
-        setSelectedDetailOption(details);
-    
-        // 첫 번째 상세 옵션을 기본값으로 선택
-        const selectedDetail = details.length > 0 ? details[0].value : '';
-    
-        // 선택된 값을 selectedQna에 저장
-        setSelectedQna({ ...selectedQna, type: selectedValue, detailType: selectedDetail });
+        setSelectedDetailOption(DETAIL_OPTIONS[selectedValue] || []);
     };
-    
-    console.log(selectedDetailOption);
     // 문의 유형, 제목, 내용이 모두 입력되었을 때 등록 버튼 활성화
-    
-
-    //--------------------------------------------------여기여기----------------------------------------------
-   
-
-    const handleInput = (e) => {
-        const { name, value } = e.target;
-        setSelectedQna({ ...selectedQna, [name]: value });
-    }
-
-   
-    const handleSelectDetailChange = (e) => {
-        const { value } = e.target;
-        setSelectedQna(prevState => ({
-            ...prevState,
-            detailType: value
-        }));
-    };
-    
     const isFormValid = () => {
-        return selectedOption && subject && content;
+        return selectedOption && title && content && detailOption;
     };
-
-
-
-
-
-    console.log("selectedQna", selectedQna);
 
 
 
@@ -227,16 +203,16 @@ const QnaInsertBoard = () => {
                         </Title>
                     </TitleWraper>
                     <FormWrapper>
-                        <form onSubmit={handleSubmit} item={setSelectedQna}>
+                        <form onSubmit={handleSubmit}>
                             <LineWrapper>
                                 <SubTitleWrapper>유형<Required>*</Required></SubTitleWrapper>
-                                <SelectBox
-                                    options={OPTIONS}
-                                    setSelectedOption={handleSelectChange}
-                                    name="type"
-                                    value={type}
-                                    onChange={handleInput}></SelectBox>
-                                <SelectDetailBox optionsDetail = {selectedDetailOption} selectedOption={selectedOption} handleSelectDetailChange={handleSelectDetailChange}></SelectDetailBox>
+                                <SelectBox 
+                                options = {OPTIONS} 
+                                selectedOption={selectedOption}
+                                setSelectedOption={handleSelectChange}></SelectBox>
+                                <SelectDetailBox  
+                                selectedOption={selectedOption}
+                                setDetailType={setDetailType}></SelectDetailBox>
                             </LineWrapper>
                             <LineWrapper>
                                 <SubTitleWrapper>제목<Required>*</Required></SubTitleWrapper>
@@ -245,8 +221,8 @@ const QnaInsertBoard = () => {
                                         type="text"
                                         name="subject"
                                         placeholder="제목을 입력해주세요"
-                                        value={subject}
-                                        onChange={handleInput}
+                                        value = {title}
+                                        onChange={(e) => setTitle(e.target.value)}
                                     />
                                 </InputWrapper>
                             </LineWrapper>
@@ -254,55 +230,55 @@ const QnaInsertBoard = () => {
                                 <SubTitleWrapper>내용<Required>*</Required></SubTitleWrapper>
                                 <TextAreaWrapper>
                                     <TextArea
-                                        placeholder=""
-                                        name="content"
-                                        onChange={handleInput}>
+                                        placeholder= ""  
+                                        value={content}
+                                        onChange={(e) => setContent(e.target.value)}>
                                     </TextArea>
                                 </TextAreaWrapper>
                             </LineWrapper>
                             <LineWrapper>
-                                <CameraWrapper>
-                                    <CameraButton>
-                                        <Camera />
-                                    </CameraButton>
-                                </CameraWrapper>
-
+                                    <CameraWrapper>
+                                        <CameraButton>
+                                            <Camera />
+                                        </CameraButton>
+                                    </CameraWrapper>
+                                    
                             </LineWrapper>
                             <ContextWrapper>
-                                <SpanWrapper>
-                                    <span><li>30MB 이하의 이미지만 업로드 가능합니다.</li></span>
-                                </SpanWrapper>
-                                <SpanWrapper>
-                                    <span><li>상품과 무관한 내용이거나 음란 및 불법적인 내용은 통보없이 삭제 될 수 있습니다.</li></span>
-                                </SpanWrapper>
-                                <SpanWrapper>
-                                    <span><li>사진은 최대 8장까지 등록가능합니다.</li></span>
-                                </SpanWrapper>
+                                        <SpanWrapper>
+                                            <span><li>30MB 이하의 이미지만 업로드 가능합니다.</li></span>
+                                        </SpanWrapper>
+                                        <SpanWrapper>
+                                            <span><li>상품과 무관한 내용이거나 음란 및 불법적인 내용은 통보없이 삭제 될 수 있습니다.</li></span>
+                                        </SpanWrapper>
+                                        <SpanWrapper>
+                                            <span><li>사진은 최대 8장까지 등록가능합니다.</li></span>
+                                        </SpanWrapper>                                       
                             </ContextWrapper>
                             <QuestionWrapper>
                                 <LineWrapper>
                                     <SubTitleWrapper>답변수신</SubTitleWrapper>
                                     <MessageWrapper>
-
+                                    
                                         <PhoneNumber>
                                             <PhoneNumberInput
                                                 type="text"
-                                                disabled={true}
-                                                value="010"
+                                                disabled={true} 
+                                                value = "010"
                                             />
                                         </PhoneNumber>
-
+                                            
                                         <MessageChecked>
                                             <MessageCheckedLabel>
-                                                <MessageCheckedInput
-                                                    type="checkbox"
-                                                    checked={clicked}
-                                                    onChange={handleSvgClick}
+                                                <MessageCheckedInput 
+                                                type="checkbox"
+                                                checked={clicked}
+                                                onChange={handleSvgClick}
                                                 />
                                                 <MessageCheckedImageWrapper onClick={handleSvgClick}>
-                                                    {clicked ?
-                                                        <FaCheckCircle /> :
-                                                        <FaRegCheckCircle />
+                                                    {clicked ? 
+                                                    <FaCheckCircle/> : 
+                                                    <FaRegCheckCircle />
                                                     }
                                                 </MessageCheckedImageWrapper>
                                                 <MessageCheckedImageText>문자/알림톡 받기</MessageCheckedImageText>
@@ -587,7 +563,7 @@ justify-content: center;
 -webkit-box-align: center;
 align-items: center;
 padding-top: 40px;
-`;
+`;  
 
 const InsertButton = styled.button`
 width: 160px;
@@ -608,12 +584,11 @@ border-radius: 3px !important;
 }
 `;
 
-
 const DropdownContainer = styled.div`
 position: relative;
 width: 200px;
+margin-right: 20px;
 `;
-
 const StyledSelect = styled.select`
   width: 100%;
   height: 44px;
@@ -637,6 +612,7 @@ const DropdownIcon = styled(IoMdArrowDropdown)`
   transform: translateY(-50%);
   pointer-events: none; /* 클릭 시 select가 반응하도록 */
 `;
+
 
 
 

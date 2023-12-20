@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 
 import styled from "styled-components";
 
-const CategoryList = ["추석선물세트", "와인", "과일"];
+const CategoryList = ["간식과자떡", "간편식밀키트샐러드", "건강식품", "과일견과쌀", "국반찬메인요리", "면양념요리", "베이커리", "생수음료커피", "수산해산", "유제품", "정육계란", "채소"];
 
 const Catergories = ({ onChangeCategory }) => {
   return (

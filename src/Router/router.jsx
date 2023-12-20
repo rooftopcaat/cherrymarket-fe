@@ -26,7 +26,9 @@ import MypageAddress from "../pages/Mypages/MypageAddress";
 import Point from '../pages/Mypages/Point';
 import MyOrderDetail from '../pages/Mypages/MyOrderDetail';
 import MyOrder from "../pages/Mypages/MyOrder";
-
+import BestItem from "../pages/BestItem";
+import DetailItem from "../pages/DetailItem";
+import QnaUpdate from "../pages/QnaUpdate";
 const Router = () => {
   return (
     <>
@@ -59,6 +61,9 @@ const Router = () => {
           <Route path="/sandbox" element={<TossPay />} />
           <Route path="/sandbox/success" element={<SuccessPage />} />
           <Route path="/sandbox/fail" element={<FailPage />} />
+          <Route path="/qnaUpdate" element={<QnaUpdate />} />
+          <Route path="/bestitem" element={<BestItem />} />
+          <Route path="/detailitem/:goodsCode" element={<DetailItem />} />
         </Routes>
       </BrowserRouter>
     </>

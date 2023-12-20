@@ -61,6 +61,8 @@ useEffect(() => {
                 type="text"
                 name="email"
                 value={email}
+                name="email"
+                value={email}
                 onChange={onIdHandler}
               />
             </InputWrapper>
@@ -87,7 +89,7 @@ useEffect(() => {
               width="100%"
               height="54px"
               border="0px none"
-              backgroundColor="#5f0080"
+              backgroundColor="rgb(149, 5, 38);"
               color="white"
               fontSize="16px"
               onClick={submitHandler}
@@ -100,6 +102,8 @@ useEffect(() => {
               width="100%"
               height="54px"
               fontSize="16px"
+              color = "rgb(149, 5, 38);"
+              border = "1px solid rgb(149, 5, 38);"
               onClick={() => nav("/join")}
             >
               회원가입

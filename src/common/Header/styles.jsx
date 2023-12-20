@@ -25,7 +25,7 @@ export const HeadUserLink = styled(Link)`
   cursor: pointer;
   background-color: transparent;
   text-decoration: none;
-  color: rgb(95, 0, 128);
+  color: rgb(149, 5, 38);
 `;
 
 export const HeadeVertical = styled.div`
@@ -91,7 +91,7 @@ export const HeadLeft = styled(Link)`
 export const LogoButton = styled.button`
   font-family: "Noto Sans KR", sans-serif;
   flex-shrink: 0;
-  margin-left: 20px;
+  // margin-left: 10px;
   font-size: 18px;
   font-weight: 100;
   line-height: 1.33;
@@ -100,7 +100,7 @@ export const LogoButton = styled.button`
   border-radius: 0;
   cursor: pointer;
   font-weight: 600;
-  color: #950526;
+  color: #e72956;
   border: none;
   background-color: inherit;
 `;
@@ -123,7 +123,7 @@ export const SearchForm = styled.div`
   width: 400px;
   height: 48px;
   padding-left: 14px;
-  border: 1px solid rgb(95, 0, 128);
+  border: 1px solid #c0163d;
   border-radius: 6px;
   background-color: rgb(255, 255, 255);
   box-shadow: rgb(247 247 247) 0px 0px 0px 1px inset;

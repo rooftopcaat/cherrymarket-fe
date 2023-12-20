@@ -5,6 +5,7 @@ import jwt_decode from 'jwt-decode';
 const initialState = {
   user: {},
   isLoggedIn: false,
+  userId: null,
 };
 
 // 로그인 thunk
@@ -14,9 +15,11 @@ export const loginThunk = createAsyncThunk(
     try {
       const response = await instance.post("/auth/sign-in", payload);
       sessionStorage.setItem("accessToken", response.data.accessToken); // 토큰을 세션 스토리지에 저장
+      const response = await instance.post("/auth/sign-in", payload);
+      sessionStorage.setItem("accessToken", response.data.accessToken); // 토큰을 세션 스토리지에 저장
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
-      alert(error.response.data.statusCode);
+      alert(error.response.data.errorMessage); // 에러 발생시 메시지 출력
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
