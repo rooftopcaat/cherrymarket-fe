@@ -80,8 +80,7 @@ const MypageAddress = () => {
     setAddress(fullAddress);
     setZipCode(data.zonecode);
   };
-  console.log(address);
-  console.log(zipCode);
+
   const openAddressModal = () => {
     setIsAddressMadal(true);
   };

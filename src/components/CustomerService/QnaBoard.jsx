@@ -370,7 +370,7 @@ margin-bottom: 20px;
  }
 `;
 
-const SubTitleLine = styled.th` 
+export const SubTitleLine = styled.th` 
     -webkit-box-flex: 1;
     flex-grow: 1;
     text-align: center;

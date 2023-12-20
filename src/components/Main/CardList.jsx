@@ -1,5 +1,5 @@
 
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import FixedCard from './FixedCard';
 import axios from 'axios';
@@ -12,6 +12,7 @@ import 'swiper/css/navigation';
 // Import Swiper styles
 // import "swiper/css";
 import "./swiperCss.css";
+import CartMadal from '../CartList/CartMadal';
 
 
 
@@ -20,61 +21,78 @@ import "./swiperCss.css";
 const FixedImg = () => {
   const [FiexdItemPrice, setFiexdItemPirce] = useState([]);
   const brseUrl = process.env.REACT_APP_API;
- 
- 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+
   useEffect(() => {
-     const fetchData = async () => {
-       try {
-         const response = await axios.get(`${brseUrl}/goods/findDiscount`)
-        
-         console.log(response.data)
-         setFiexdItemPirce(response.data)
-       } catch (error) {
-         console.error('Error:', error);
-       }
-     };
- 
-     fetchData();
-   }, []); 
- 
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${brseUrl}/goods/findDiscount`)
 
-   
-   console.log(FiexdItemPrice)
- 
-   
- 
-   return (
-     <Container>
-       {/* 여기서부터 고정값 */}
-       <Div>✨놓치면 후회할 가격🏅 
-       <P>최대82%! 올해 마지막 뷰티 음식 혜택</P>
-       </Div>
-       
-       <Swiper
-         slidesPerView={4}
-         spaceBetween={0}
-         slidesPerGroup={4}
-         loop={true}
-         loopFillGroupWithBlank={true}
-         pagination={{
-           clickable: true
-         }}
-         navigation={true}
-         modules={[Pagination, Navigation]}
-         className="mySwiper"
-         style={{
-          height : '500px',
-         }}
+        console.log(response.data)
+        setFiexdItemPirce(response.data)
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(setFiexdItemPirce)
+
+  const handleItemClick = (item) => {
+    setSelectedItem(item);
+    openModal();
+  };
+
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  // 모달 닫기 함수
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+
+
+
+  return (
+    <Container>
+
+      {/* 여기서부터 고정값 */}
+      <Div>✨놓치면 후회할 가격🏅
+        <P>최대82%! 올해 마지막 뷰티 음식 혜택</P>
+      </Div>
+
+      <Swiper
+        slidesPerView={4}
+        spaceBetween={0}
+        slidesPerGroup={4}
+        loop={true}
+        loopFillGroupWithBlank={true}
+        pagination={{
+          clickable: true
+        }}
+        navigation={true}
+        modules={[Pagination, Navigation]}
+        className="mySwiper"
+        style={{
+          height: '500px',
+        }}
       >
-         <DivSt>
-           {/* 지금 현재는 mainImg 안에 있는 정보들을 map 돌려 붙여넣기 */}
-           {FiexdItemPrice.map((item) => (
-           <SwiperSlide key={item.id}><FixedCard key={item.id} item={item}/></SwiperSlide>
-           ))}
-         </DivSt>
-       </Swiper>
+        <DivSt>
+          {/* 지금 현재는 mainImg 안에 있는 정보들을 map 돌려 붙여넣기 */}
+          {FiexdItemPrice.map((item) => (
+            <SwiperSlide key={item.id}><FixedCard key={item.id} item={item} openModal={openModal} closeModal={closeModal} onItemClick={handleItemClick} /></SwiperSlide>
+          ))}
+        </DivSt>
+      </Swiper>
 
-      <Div>놓치면 후회할 가격🧐 
+      <Div>놓치면 후회할 가격🧐
         <P>최대82%! 올해 마지막 뷰티 음식 혜택</P>
       </Div>
       <Swiper
@@ -90,17 +108,18 @@ const FixedImg = () => {
         modules={[Pagination, Navigation]}
         className="mySwiper"
         style={{
-          height : '500px',
-         }}
+          height: '500px',
+        }}
       >
         <DivSt>
           {/* 지금 현재는 mainImg 안에 있는 정보들을 map 돌려 붙여넣기 */}
           {FiexdItemPrice.map((item) => (
-           <SwiperSlide key={item.id}><FixedCard key={item.id} item={item}/></SwiperSlide>
-           ))}
+            <SwiperSlide key={item.id}><FixedCard key={item.id} item={item} openModal={openModal} closeModal={closeModal} onItemClick={handleItemClick} /></SwiperSlide>
+          ))}
         </DivSt>
       </Swiper>
-      </Container>
+      <CartMadal isOpen={isModalOpen} closeModal={closeModal} item={selectedItem} />
+    </Container>
   );
 }
 

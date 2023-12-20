@@ -8,6 +8,7 @@ const ItemList = ({ id, name, originalPrice, sale, description, goodsCode,discou
   const formatPrice = (price) => {
     return new Intl.NumberFormat({ style: 'currency', currency: 'KRW' }).format(price);
   };
+
   return (
     <>
      <Link key = {id} to = {`/detailitem/${goodsCode}`}>
@@ -137,7 +138,7 @@ const ItemTextWrapper = styled.div`
   text-align: left;
 `;
 
-const ItemTextDeliveryWrapper = styled.span`
+export const ItemTextDeliveryWrapper = styled.span`
   display: block;
   padding-bottom: 2px;
   
@@ -150,7 +151,7 @@ const ItemTextDelivery = styled.span`
   text-align: left;
   
 `;
-const ItemTextTitle = styled.span`
+export const ItemTextTitle = styled.span`
   max-height: 58px;
   font-size: 16px;
   line-height: 24px;
@@ -178,24 +179,26 @@ const ItemTextSubTitle = styled.p`
   -webkit-box-orient: vertical;
 `;
 
-const ItemTextPriceWrapper = styled.div`
+export const ItemTextPriceWrapper = styled.div`
 text-align: left;
   display: flex;
   flex-direction: column;
   padding-top: 8px;
 `;
 
-const ItemOriginalPrice = styled.span`
+export const ItemOriginalPrice = styled.span`
+margin-left: 1px;
+margin-bottom: 1px;
 font-size: 14px;
 color: rgb(181, 181, 181);
 text-decoration: line-through;
 `;
 
-const ItemPriceWrapper = styled.div`
+export const ItemPriceWrapper = styled.div`
   text-align: left;
 `;
 
-const ItemSale = styled.span`
+export const ItemSale = styled.span`
 font-weight: 800;
 font-size: 16px;
 line-height: 24px;
@@ -205,7 +208,7 @@ color : #950526;
 margin-right: 4px;
 `;
 
-const ItemPrice = styled.span`
+export const ItemPrice = styled.span`
 font-weight: 800;
 font-size: 16px;
 line-height: 24px;

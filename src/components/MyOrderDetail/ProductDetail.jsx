@@ -8,15 +8,21 @@ import OrderSender from './OrderSender';
 import { H3, TitleContainer } from './Style.jsx';
 import DelivertInfoBox from './DeliveryInfoBox';
 import AddInfo from './AddInfo.jsx';
+import { useState, useEffect } from 'react';
 
 
 const ProductDetail = ({goodsDetails, orderCode}) => {
+  const [goodsItem, setGoodsItem] = useState([]);
+  const orderStatus = goodsDetails?.shippingDetailsInfo?.shippingStatus;
 
-  const goodsDeItem = goodsDetails.goodsDetailsInfo;
-  const orderStatus = goodsDetails.shippingDetailsInfo.shippingStatus;
   
-  console.log(orderStatus);
-  console.log(goodsDeItem);
+
+  useEffect(() => { // 프록스로 받은 값 goodsItem 에 저장
+
+    if (goodsDetails.goodsDetailsInfo) {
+      setGoodsItem(goodsDetails.goodsDetailsInfo);
+    }
+  }, [goodsDetails.goodsDetailsInfo]);
 
 
   return (
@@ -25,7 +31,7 @@ const ProductDetail = ({goodsDetails, orderCode}) => {
         <H3>주문번호 <Span> {orderCode}</Span></H3>
         <Spna1>배송 또는 상품에 문제가 있나요?&nbsp;&nbsp;&nbsp;<A href='/qna'>1:1문의<StyledIcon /></A></Spna1>
     </TitleContainer>
-     {goodsDeItem.map((item) => (
+     {goodsItem.map((item) => (
        <GoodsBox key={item.id} item={item} orderStatus={orderStatus}/>
      ))}
     <BtnContainer>

@@ -15,18 +15,37 @@ import DelivertInfoBox from "../../components/MyOrderDetail/DeliveryInfoBox";
 import AddInfo from "../../components/MyOrderDetail/AddInfo.jsx";
 import ProductDetail from "../../components/MyOrderDetail/ProductDetail.jsx";
 import { useParams } from 'react-router-dom';
-import details from '../../components/MyOrderDetail/Data.jsx';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const MyOrderDetail = () => {
   const { orderCode } = useParams();
+  const [details, setDetails] = useState([]);
+  const [deliveryInfo, setDeliveryInfo] = useState([]);
+  const [sender, setSender] = useState([]);
+  const baseUrl = process.env.REACT_APP_API;
+  const access_token = sessionStorage.getItem("accessToken");
+  
 
-  const orderDetail = details.find(detail => detail.shippingDetailsInfo.orderCode === orderCode);
-  const paymentDetail = orderDetail.amountInfo;
-  const sender = orderDetail.consumerInfo;
-  const deliveryInfo = orderDetail.shippingDetailsInfo;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${baseUrl}/order/list/${orderCode}/order-details`, {
+          headers: {
+            'Authorization': `Bearer ${access_token}`,
+          }
+        });
+        
+        setDetails(response.data)
+        setSender(response.data.consumerInfo)
+        setDeliveryInfo(response.data.shippingDetailsInfo)
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
 
-  console.log(paymentDetail);
-  console.log(orderDetail);
+    fetchData();
+  }, []); 
 
   return (
     <>
@@ -40,11 +59,11 @@ const MyOrderDetail = () => {
               <TitleHead>주문 내역 상세</TitleHead>
             </Title>
           </TitleWraper>
-          <ProductDetail goodsDetails={orderDetail} orderCode={orderCode}/>
+          <ProductDetail goodsDetails={details} orderCode={orderCode}/>
           <DeliveryBox />
-          <PaymentBox paymentDetail={paymentDetail}/>
-          <OrderSender sender={sender} orderCode={orderCode}/>
-          <DelivertInfoBox deliveryInfo={deliveryInfo}/>
+          <PaymentBox paymentDetail={details}/>
+             <OrderSender sender={sender} orderCode={orderCode}/> 
+          <DelivertInfoBox deliveryInfo={deliveryInfo}/> 
           <AddInfo />
         </Container>
       </FlexWrapper>

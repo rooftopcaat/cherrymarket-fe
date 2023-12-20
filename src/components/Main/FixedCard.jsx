@@ -2,20 +2,42 @@ import React from "react";
 import styled from "styled-components";
 import { BsCart } from "react-icons/bs";
 import { Link } from "react-router-dom";
-const FixedCard = (props) => {
+import {
+  ItemTextDeliveryWrapper,
+  ItemTextTitle,
+  ItemTextPriceWrapper,
+  ItemOriginalPrice,
+  ItemSale,
+  ItemPrice,
+  OriginalPriceSt,
+  ItemPriceWrapper,
+} from "../NewestItem/ItemList.jsx";
+import { useState } from 'react';
+import CartModal from '../CartList/CartMadal.jsx';
 
-  function generateImageUrl() {
+
+const FixedCard = ({item, openModal, closeModal, onItemClick }) => {
+  if (!item || !item.goodsCode) {
+    // item이나 item.goodsCode가 정의되지 않았을 경우 처리
+    return null; // 또는 에러 처리를 수행하거나 다른 대안을 고려할 수 있음
+  }
+  
+
+  function generateImageUrl() { //오더코드로 이미지 url 생성
     const imageUrlBase = "https://kr.object.ncloudstorage.com/cherry-product/";
-    const imageUrl = `${imageUrlBase}${props.item.goodsCode}/${props.item.goodsCode}_0.png`;
+    const imageUrl = `${imageUrlBase}${item.goodsCode}/${item.goodsCode}_0.png`;
     return imageUrl;
   }
+  const formatPrice = (price) => { //숫자 3자리마다 콤마 찍어주는 함수
+    return price.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' }).replace('₩', ''); 
+  };
 
 
   return (
-    <React.Fragment>
+    <>
       <DivSt>
         <CardSt>
-        <Link key = {props.item.goodsId} to = {`/detailitem/${props.item.goodsCode}`}>
+        <Link key = {item.goodsId} to = {`/detailitem/${item.goodsCode}`}>
           <ImageSt>
             <img
               style={{ width: "250px", height: "300px" }}
@@ -23,28 +45,27 @@ const FixedCard = (props) => {
             />
           </ImageSt>
         </Link>
-          <ButtonSt>
+          <ButtonSt
+           onClick={() => onItemClick(item)}
+          >
             <BsCart /> 담기
           </ButtonSt>
-          <h3 style={{ marginLeft: "4px", fontSize: "14px" }}>
-            {props.item.goodsName}
+          <h3 style={{ marginLeft: "4px", fontSize: "14px" , paddingTop: "10px"}}>
+            {item.goodsName}
           </h3>
-          <OriginalPriceSt>
-          {props.item.price}원
-           </OriginalPriceSt>
-
-          <span
-            style={{ marginLeft: "4px", fontSize: "16px", color: "#FA622F" }}
-          >
-            {props.item.discountRate}%
-          </span>
-          <span style={{ marginLeft: "4px", fontSize: "16px", }}>
-            {props.item.discountedPrice
-}원
-          </span>
+          <ItemTextPriceWrapper>
+          <ItemOriginalPrice>
+          {formatPrice(item.price)}원
+            </ItemOriginalPrice>
+        <ItemPriceWrapper>
+          <ItemSale>
+            {`${item.discountRate}%`}</ItemSale>
+          <ItemPrice>{formatPrice(item.discountedPrice)}원</ItemPrice>
+        </ItemPriceWrapper>
+        </ItemTextPriceWrapper>
         </CardSt>
       </DivSt>
-    </React.Fragment>
+    </>
   );
 };
 
@@ -98,7 +119,7 @@ const ButtonSt = styled.button`
   gap: 8px; /* 버튼 내부 요소 사이의 간격을 8px로 설정 */
 `;
 
-const OriginalPriceSt = styled.span`
+const OriginalPriceSt2 = styled.span`
   display: block;
   padding-top: 2px;
   color: rgb(181, 181, 181);

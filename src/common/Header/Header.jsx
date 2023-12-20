@@ -44,25 +44,25 @@ const Header = () => {
   const baseUrl = process.env.REACT_APP_API;
 
 
-// async 함수 정의 
-async function fetchData() {
-  
-  try {
-    const response = await axios.get(`${baseUrl}/account/my-info`, {
-      headers: {
-        'Authorization': `Bearer ${access_token}`,
-      }
-    });
+  // async 함수 정의 
+  async function fetchData() {
 
-    const name = response.data.name;
-    setUserName(name);
+    try {
+      const response = await axios.get(`${baseUrl}/account/my-info`, {
+        headers: {
+          'Authorization': `Bearer ${access_token}`,
+        }
+      });
 
-  } catch (error) {
-    console.error('Error:', error);
+      const name = response.data.name;
+      setUserName(name);
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
   }
-}
-fetchData();
-  
+  fetchData();
+
   useEffect(() => {
     // 세션 스토리지에서 'accessToken'이라는 키로 저장된 토큰을 확인합니다.
     const token = sessionStorage.getItem("accessToken");
@@ -71,10 +71,10 @@ fetchData();
 
     }
   }, [dispatch]);
-  
+
   const CartList = useSelector((state) => state?.cart?.cart?.cart);
-  
-  
+
+
   useEffect(() => {
     function onScroll() {
       window.scrollY > 110
@@ -86,24 +86,22 @@ fetchData();
       window.removeEventListener("scroll", onScroll);
     };
   }, [showFixedHeader]);
-  
-  
+
+
   useEffect(() => {
     if (userData.userName) {
       dispatch(getCartAysnc());
     }
   }, [userData, dispatch]); // userData를 의존성 배열에 추가합니다.
-  
-  }, [userData, dispatch]); // userData를 의존성 배열에 추가합니다.
-  
+
+
+
   const onLogOut = useCallback(() => {
     sessionStorage.clear(); // 로그아웃 시 세션 스토리지의 모든 데이터를 삭제합니다.
     window.location.reload(); // 페이지를 새로고침합니다.
   }, [dispatch]);
 
-    sessionStorage.clear(); // 로그아웃 시 세션 스토리지의 모든 데이터를 삭제합니다.
-    window.location.reload(); // 페이지를 새로고침합니다.
-  }, [dispatch]);
+
 
 
   const handleQnaClick = (e) => {
@@ -129,63 +127,70 @@ fetchData();
               </HeadUserLink>
             </>
           ) : (
-            <> 
-            <ServiceCenter>
-            <HeadUserLink to="/mypage/order" style={{ color: "inherit" }}>
-            <RatingIcon>일반</RatingIcon><span style={{color:'rgb(149, 5, 3)'}}>{userName}님</span>
-              <ServiceIcon />
-              <ServiceNav>
-              <CustomerLink to= "//mypage/order">
-                  <div>주문내역</div>
-                </CustomerLink>
-                <CustomerLink to= "/mypage/pick">
-                  <div>찜한상품</div>
-                </CustomerLink>
-                <CustomerLink to= "/mypage/address">
-                  <div>배송지관리</div>
-                </CustomerLink>
-                <CustomerLink to= "/mypage/review">
-                  <div>상품후기</div>
-                </CustomerLink>
-                <CustomerLink to= "/mypage/inquiry/products">
-                  <div>상품문의</div>
-                </CustomerLink>
-                <CustomerLink to= "/mypage/point">
-                  <div>적립금</div>
-                </CustomerLink>
-                <CustomerLink to= "/mypage/coupon">
-                  <div>쿠폰</div>
-                </CustomerLink>
-                <CustomerLink to= "/mypage/info">
-                  <div>개인정보수정</div>
-                </CustomerLink>
-                <HeadLogOut onClick={onLogOut} style={{color:'rgb(149, 5, 3)'}}>로그아웃</HeadLogOut>
-              </ServiceNav>
-            </HeadUserLink>
-          </ServiceCenter>
+            <>
+              {userName === '관리자' && (
+                <>
+                  <HeadUserLink to="/admin" style={{ color: "red" }}>
+                    <b>관리자</b>
+                  </HeadUserLink>
+                  <HeadeVertical />
+                </>
+              )}
+              <ServiceCenter>
+                <HeadUserLink to="/mypage/order" style={{ color: "inherit" }}>
+                  <RatingIcon>일반</RatingIcon><span style={{ color: 'rgb(149, 5, 3)' }}>{userName}님</span>
+                  <ServiceIcon />
+                  <ServiceNav>
+                    <CustomerLink to="//mypage/order">
+                      <div>주문내역</div>
+                    </CustomerLink>
+                    <CustomerLink to="/mypage/pick">
+                      <div>찜한상품</div>
+                    </CustomerLink>
+                    <CustomerLink to="/mypage/address">
+                      <div>배송지관리</div>
+                    </CustomerLink>
+                    <CustomerLink to="/mypage/review">
+                      <div>상품후기</div>
+                    </CustomerLink>
+                    <CustomerLink to="/mypage/inquiry/products">
+                      <div>상품문의</div>
+                    </CustomerLink>
+                    <CustomerLink to="/mypage/point">
+                      <div>적립금</div>
+                    </CustomerLink>
+                    <CustomerLink to="/mypage/coupon">
+                      <div>쿠폰</div>
+                    </CustomerLink>
+                    <CustomerLink to="/mypage/info">
+                      <div>개인정보수정</div>
+                    </CustomerLink>
+                    <HeadLogOut onClick={onLogOut} style={{ color: 'rgb(149, 5, 3)' }}>로그아웃</HeadLogOut>
+                  </ServiceNav>
+                </HeadUserLink>
+              </ServiceCenter>
 
             </>
           )}
           <HeadeVertical />
           <ServiceCenter>
             <HeadUserLink to="/notice" style={{ color: "inherit" }}>
-            <HeadUserLink to="/notice" style={{ color: "inherit" }}>
               고객센터
               <ServiceIcon />
               <ServiceNav>
-              <CustomerLink to= "/notice">
+                <CustomerLink to="/notice">
                   <div>공지사항</div>
                 </CustomerLink>
-                <CustomerLink to= "/faq">
+                <CustomerLink to="/faq">
                   <div>자주하는 질문</div>
                 </CustomerLink>
                 <>
                   {!isLoggedIn ? (
-                    <CustomerLink to= "/login" onClick={handleQnaClick}>
+                    <CustomerLink to="/login" onClick={handleQnaClick}>
                       <div>1:1 문의</div>
                     </CustomerLink>
                   ) : (
-                    <CustomerLink to= "/qna">
+                    <CustomerLink to="/qna">
                       <div>1:1 문의</div>
                     </CustomerLink>
                   )}
@@ -201,7 +206,7 @@ fetchData();
               width: '50px',
               height: '80px',
               marginBottom: '10px',
-            }}/>
+            }} />
             <LogoButton>마켓체리</LogoButton>
           </HeadLeft>
           <HeadCenter>
@@ -212,12 +217,9 @@ fetchData();
           </HeadCenter>
           <HeadRight>
             <HeadRightContents>
-            <CartIconWrap>
-              </CartIconWrap>
-            <CartIconWrap>
+              <CartIconWrap>
               </CartIconWrap>
               <div></div>
-              <button aria-label="찜하기" type="button"><Link to="/mypage/pick"></Link></button>
               <button aria-label="찜하기" type="button"><Link to="/mypage/pick"></Link></button>
               <CartIconWrap>
                 <Link to="/cart">
@@ -226,11 +228,6 @@ fetchData();
                   </button>
                 </Link>
               </CartIconWrap>
-              <Link to="/mypage/order">
-                  <button>
-                  <IoPersonCircleOutline />
-                  </button>
-                </Link>
             </HeadRightContents>
           </HeadRight>
         </HeadMain>

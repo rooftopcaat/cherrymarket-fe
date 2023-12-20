@@ -3,7 +3,7 @@ import Main from "../pages/Main";
 import Join from "../pages/Join";
 import Login from "../pages/Login";
 import Cart from "../pages/Cart";
-import Admin from "../pages/Admin";
+import Admin from "../pages/Admin/Admin";
 import Detail from "../pages/Detail";
 import Newest from "../pages/Newest";
 import Order from "../pages/Order";
@@ -29,6 +29,9 @@ import MyOrder from "../pages/Mypages/MyOrder";
 import BestItem from "../pages/BestItem";
 import DetailItem from "../pages/DetailItem";
 import QnaUpdate from "../pages/QnaUpdate";
+import ProductPage from "../pages/Admin/ProductPage";
+import PaymentPage from "../pages/Admin/PaymentPage";
+import NoticePage from "../pages/Admin/NoticePage";
 const Router = () => {
   return (
     <>
@@ -64,6 +67,9 @@ const Router = () => {
           <Route path="/qnaUpdate" element={<QnaUpdate />} />
           <Route path="/bestitem" element={<BestItem />} />
           <Route path="/detailitem/:goodsCode" element={<DetailItem />} />
+          <Route path="/admin/product" element={<ProductPage />} />
+          <Route path="/admin/payment" element={<PaymentPage />} />
+          <Route path="/admin/Notice" element={<NoticePage />} />
         </Routes>
       </BrowserRouter>
     </>

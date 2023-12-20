@@ -4,7 +4,6 @@ import { H3, OrderDetailLi, OrderDetailLiValueSpan, OrderDetailTitleSpan, OrderD
 const DelivertInfoBox = (props) => {
 
   const item = props.deliveryInfo;
-  console.log(item);
 
   return (
 

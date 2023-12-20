@@ -14,11 +14,14 @@ import { getCategoryAsync } from "../redux/modules/categorySlice";
 import FixedImg from "../components/Main/CardList";
 import PopupList from '../components/PopUp/PopupList';
 import FixedSiderbar from "../common/FiexDiderbar/FixedSiderbar";
+import CartModal from '../components/CartList/CartMadal';
 
 const Main = () => {
   const [category, setCategory] = useState("추석선물세트");
   const dispatch = useDispatch();
   const CateogryFilter = useSelector((state) => state.category.data);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const onChangeCategory = useCallback((e) => {
     setCategory(e.target.value);
@@ -51,11 +54,23 @@ const Main = () => {
   const storedPopupData = localStorage.getItem('popupData');
   const popupData = storedPopupData ? JSON.parse(storedPopupData) : null;
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  // 모달 닫기 함수
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
+
+      <CartModal />
+
       <Header />
       <MainBanner />
-      <FixedImg />
+      <FixedImg openModal={openModal} closeModal={closeModal} />
       <PopupList popupData={popupData} />
       <Suggest list={list}>이 상품 어때요?</Suggest>
       <LineBanner />
@@ -63,6 +78,7 @@ const Main = () => {
       <Suggest list={CateogryFilter}>
       </Suggest>
       <FixedSiderbar />
+      
       <Footer/>
     </>
   );

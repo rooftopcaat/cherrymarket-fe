@@ -13,8 +13,7 @@ export const loginThunk = createAsyncThunk(
   "loginSlice/loginThunk",
   async (payload, thunkAPI) => {
     try {
-      const response = await instance.post("/auth/sign-in", payload);
-      sessionStorage.setItem("accessToken", response.data.accessToken); // 토큰을 세션 스토리지에 저장
+
       const response = await instance.post("/auth/sign-in", payload);
       sessionStorage.setItem("accessToken", response.data.accessToken); // 토큰을 세션 스토리지에 저장
       return thunkAPI.fulfillWithValue(response.data);
@@ -39,7 +38,6 @@ const loginSlice = createSlice({
         state.isLoggedIn = false;
         state.user = {};
       }
-      console.log('슬라이스 함수 호출되나확인');
     },
     logout: (state) => {
       sessionStorage.removeItem("accessToken"); // 세션 스토리지에서 토큰 제거
