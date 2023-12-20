@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-const AddressBox = () => {
+const AddressBox = (props) => {
 
 
     return (
@@ -19,14 +19,17 @@ const AddressBox = () => {
             </div>
           </LabelDiv>
           <AdressDiv>
+          {props.item.default && ( 
             <DefaultAddress>기본배송지</DefaultAddress>
-            서울시 관악구 441-72 go 빌라 5호
+          )}
+            {props.item.address}<br />
+            <div style={{marginTop:"5px"}}>{props.item.addressDetail}</div>
           </AdressDiv>
-          <Info style={{ flexBasis: "120px" }}>김주영</Info>
+          <Info style={{ flexBasis: "120px" }}>{props.item.name}</Info>
           <Info style={{ flexBasis: "100px" }}>010-4288-1828</Info>
           <Info style={{ flexBasis: "100px" }}>
             <div>
-              <span>샛별배송</span>
+              <span style={{color:"rgb(149, 5, 38)"}}>샛별배송</span>
             </div>
           </Info>
           <Info style={{ flexBasis: "60px" }}>
@@ -58,7 +61,7 @@ const Input = styled.input`
   padding: 0;
 `;
 
-const StyledIcon = styled(IoCheckmarkCircleOutline)`
+export const StyledIcon = styled(IoCheckmarkCircleOutline)`
   width: 24px;
   height: 24px;
   vertical-align: middle;
@@ -109,6 +112,7 @@ const DefaultAddress = styled.div`
   line-height: 22px;
   letter-spacing: 0px;
   text-align: center;
+  box-shadow: rgb(149, 5, 38) 0px 1px 2px 0px;
 `;
 
 const Info = styled.div`

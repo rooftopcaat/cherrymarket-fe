@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Footer = () => {
   return (
     <React.Fragment>
-      <hr style={{width: "98%", border: "1px solid lightgray"}}/>
+      <hr style={{width: "98%", border: "1px solid lightgray", marginBottom: "45px"}}/>
       <Grid>
         <GridSt>
           <WrapSt>

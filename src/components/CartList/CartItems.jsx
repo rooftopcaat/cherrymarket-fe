@@ -11,6 +11,7 @@ const CartItems = () => {
   useEffect(() => {
     dispatch(getCartAysnc());
   }, []);
+  
   return (
     <ListWrap>
       {cartData?.map((list) => {

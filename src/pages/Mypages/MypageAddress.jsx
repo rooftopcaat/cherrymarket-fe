@@ -17,39 +17,82 @@ import FixedSiderbar from "../../common/FiexDiderbar/FixedSiderbar.jsx";
 import Footer from "../../common/Footer/Footer.jsx";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useDaumPostcodePopup } from "react-daum-postcode";
+import AddressMadal from "../../components/PopUp/AddressMadal.jsx";
 
 const MypageAddress = () => {
-
   const [addressItem, setAddressItem] = useState([]);
   const baseUrl = process.env.REACT_APP_API;
   const access_token = sessionStorage.getItem("accessToken");
 
-  
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get(`${baseUrl}/customer/address/my-list`, {
-          headers: {
-            'Authorization': `Bearer ${access_token}`,
-           
+        const response = await axios.get(`${baseUrl}/customer/address/my-list`,
+          {
+            headers: {
+              Authorization: `Bearer ${access_token}`,
+            },
           }
-        });
-       
-
+        );
+        console.log(response.data);
         setAddressItem(response.data);
-
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     }
-    
     fetchData();
-  }, [addressItem, access_token, baseUrl]);
+  }, []);
 
+  const [modal, setModal] = useState(false);
+  const [isAddressMadal, setIsAddressMadal] = useState(false);
+  const [address, setAddress] = useState("");
+  const [zipCode, setZipCode] = useState("");
 
+  const showModal = () => {
+    setModal(!modal);
+  };
 
+  const scriptUrl =
+    "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
+  const open = useDaumPostcodePopup(scriptUrl);
 
+  const handleComplete = (data) => {
+    let fullAddress = data.address;
+    let extraAddress = "";
 
+    if (data.addressType === "R") {
+      if (data.bname !== "") {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName !== "") {
+        extraAddress +=
+          extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+      }
+      fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+    }
+
+    // console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+    fullAddress = fullAddress;
+    
+    // 가져온 fullAddress를 state에 저장!
+    setIsAddressMadal(true);
+    setAddress(fullAddress);
+    setZipCode(data.zonecode);
+  };
+  console.log(address);
+  console.log(zipCode);
+  const openAddressModal = () => {
+    setIsAddressMadal(true);
+  };
+
+  const closeAddressModal = () => {
+    setIsAddressMadal(false);
+  };
+
+  const handleClick = () => {
+    open({ onComplete: handleComplete });
+  };
 
 
   return (
@@ -67,14 +110,21 @@ const MypageAddress = () => {
             <div>
               <SecondDiv>
                 <div>
-                  <StyledButton>
-                    <StyledSpan>
+                  <StBtn onClick={handleClick}>
+                    <Span1>
                       <StyledImg
                         src="https://res.kurly.com/pc/ico/2006/ico_add_16x16.svg"
                         alt="새 배송지 추가"
-                      />새 배송지 추가
-                    </StyledSpan>
-                  </StyledButton>
+                      />
+                      새 배송지 추가
+                    </Span1>
+                  </StBtn>
+                  <AddressMadal
+                    isOpen={isAddressMadal}
+                    onClose={closeAddressModal}
+                    itemAddrss={address}
+                    zipCode={zipCode}
+                  />
                 </div>
               </SecondDiv>
             </div>
@@ -88,11 +138,14 @@ const MypageAddress = () => {
             <TextDiv style={{ flexBasis: "60px" }}>수정</TextDiv>
           </SubTitle>
           <UlWrapper>
-                <AddressBox />
+            {addressItem.map((item) => (
+                    <AddressBox key={item.addressId} item={item}/>
+            ))}
           </UlWrapper>
         </Container>
       </FlexWrapper>
       <FixedSiderbar />
+      <detailModal />
       <Footer />
     </>
   );
@@ -112,9 +165,7 @@ const SecondDiv = styled.div`
   text-align: right;
 `;
 
-
-
-const StyledButton = styled.button`
+const StBtn = styled.button`
   display: block;
   padding: 0px 10px;
   text-align: center;
@@ -124,14 +175,13 @@ const StyledButton = styled.button`
   border-radius: 3px;
   color: rgb(51, 51, 51);
   background-color: rgb(255, 255, 255);
+  cursor: pointer;
 `;
 
-
-const StyledSpan = styled.span`
+const Span1 = styled.span`
   font-weight: 500;
   line-height: 24px;
 `;
-
 
 const StyledImg = styled.img`
   width: 16px;
