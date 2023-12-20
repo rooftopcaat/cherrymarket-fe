@@ -32,7 +32,7 @@ const SpeacilDeals = ({ children }) => {
       <SpeacilDealsContainer>
         <SpeacilDealsBox>
           <TimerBox>
-            <h2>{children}</h2>
+            <h2>새해특가</h2>
             <h3>24시간 한정 특가</h3>
 
             <TimerCount>
@@ -50,7 +50,7 @@ const SpeacilDeals = ({ children }) => {
                   alt="상품 이미지"
                 />
                 <ItemSticker>
-                  <span>추석특가</span>
+                  <span>새해특가</span>
                 </ItemSticker>
                 <CartButton>
                   <img
