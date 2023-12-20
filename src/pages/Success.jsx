@@ -8,35 +8,40 @@ export function SuccessPage() {
   const paymentKey = searchParams.get("paymentKey");
   const orderId = searchParams.get("orderId");
   const amount = searchParams.get("amount");
-  
+
   console.log("paymentKey", paymentKey);
   console.log("orderId", orderId);
-
+  console.log("amount", amount);
 
   async function confirmPayment() {
     const secret = "test_sk_Z61JOxRQVE1RmbXmvADyVW0X9bAq";
-    const encodedSecret = btoa(secret)
-    // TODO: API를 호출해서 서버에게 paymentKey, orderId, amount를 넘겨주세요.
-    // 서버에선 해당 데이터를 가지고 승인 API를 호출하면 결제가 완료됩니다.
-    // https://docs.tosspayments.com/reference#%EA%B2%B0%EC%A0%9C-%EC%8A%B9%EC%9D%B8
-    const response = await fetch("https://api.tosspayments.com/v1/payments/confirm", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Basic ${encodedSecret}`,
-      },
-      body: JSON.stringify({
-        paymentKey,
-        orderId,
-        amount
-      })
-    });
-
-    if (response.ok) {
-      setIsConfirmed(true);
+    const encodedSecret = btoa(secret);
+  
+    const formData = new FormData();
+    formData.append("orderId", orderId);
+    formData.append("paymentKey", paymentKey);
+    formData.append("amount", amount);
+  
+    // FormData 객체를 문자열로 변환
+    const formDataString = new URLSearchParams(formData).toString();
+  
+    try {
+      const response = await fetch("https://server.marketcherry.store/api/order/confirm", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Authorization": `Basic ${encodedSecret}`,
+        },
+        body: formDataString,
+      });
+  
+      if (response.ok) {
+        setIsConfirmed(true);
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
   }
-
   return (
     <div className="wrapper w-100">
       {isConfirmed ? (
@@ -106,8 +111,8 @@ export function SuccessPage() {
           </div>
           <div className="w-100">
             <button className="btn primary w-100" onClick={confirmPayment}>
-            결제 승인하기
-          </button>
+              결제 승인하기
+            </button>
           </div>
         </div>
       )}

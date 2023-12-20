@@ -68,8 +68,7 @@ fetchData();
     const token = sessionStorage.getItem("accessToken");
     if (token) {
       dispatch(initializeLogin());
-      console.log('헤더 함수 호출되나확인');
-      
+
     }
   }, [dispatch]);
   
