@@ -12,26 +12,20 @@ const Category = ({ showHover }) => {
             <div>
               <ul>
                 <HeadSideBarItmes>
+                 
                   <div>
                     <img
-                      src="https://collection-image.kurly.com/site-category-groups/53/HvsqcMrtERGBYLaqXIDukRUpaPNHl6qiFffd2T5E.png"
-                      alt="추석선물세트"
+                      src="https://collection-image.kurly.com/site-category-groups/9/NQcAF49piGDLu6VFgONSsIHWF1xU01o95Azs7usZ.png"
+                      alt="간식과자떡"
                     />
-                    <span>추석선물세트</span>
+                    <span>간식과자떡</span>
                   </div>
                   <div>
                     <img
-                      src="https://collection-image.kurly.com/site-category-groups/12/xtK9aF5n9OfmNfWuLMmyHzxUaj7Y9pVx2MPetIex.png"
-                      alt="와인"
+                      src="https://collection-image.kurly.com/site-category-groups/6/LZjcLmIFN6IqVsraCsArIE2zPh3u2i7foirsWHQZ.png"
+                      alt="간편식밀키트샐러드"
                     />
-                    <span>와인</span>
-                  </div>
-                  <div>
-                    <img
-                      src="https://collection-image.kurly.com/site-category-groups/2/EO7bBGPrhrByqlpJYMuIFOLWo0IiOMkgMYar4Tjv.png"
-                      alt="과일"
-                    />
-                    <span>과일</span>
+                    <span>간편식밀키트샐러드</span>
                   </div>
                 </HeadSideBarItmes>
               </ul>
@@ -101,6 +95,7 @@ export const HeadSideBarItmes = styled.li`
     flex: 0 1 0%;
     width: 24px;
     height: 24px;
+    margin-right: 10px;
   }
   &span {
     flex: 1 1 0%;

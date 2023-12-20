@@ -2,7 +2,7 @@ import React, { useRef, useCallback, useState } from "react";
 import styled from "styled-components";
 import useInput from "../hooks/useInput";
 import { useDispatch } from "react-redux";
-import S3upload from "react-aws-s3";
+// import S3upload from "react-aws-s3";
 import imageCompression from "browser-image-compression";
 import { postProductAsync } from "../redux/modules/productSlice";
 

@@ -9,7 +9,7 @@ const HeadNavCenter = () => {
         <NavLink to="/newest">신상품</NavLink>
       </li>
       <li>
-        <span>베스트</span>
+        <NavLink to="/bestitem">베스트</NavLink>
       </li>
       <li>
         <span>알뜰쇼핑</span>

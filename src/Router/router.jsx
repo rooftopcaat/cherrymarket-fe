@@ -14,7 +14,9 @@ import Notice from "../pages/Notice";
 import Faq from "../pages/Faq";
 import Qna from "../pages/Qna";
 import QnaInsert from "../pages/QnaInsert";
-
+import BestItem from "../pages/BestItem";
+import DetailItem from "../pages/DetailItem";
+import QnaUpdate from "../pages/QnaUpdate";
 const Router = () => {
   return (
     <>
@@ -35,6 +37,9 @@ const Router = () => {
           <Route path="/faq" element={<Faq />} />
           <Route path="/qna" element={<Qna />} />
           <Route path="/qnaInsert" element={<QnaInsert />} />
+          <Route path="/qnaUpdate" element={<QnaUpdate />} />
+          <Route path="/bestitem" element={<BestItem />} />
+          <Route path="/detailitem/:goodsCode" element={<DetailItem />} />
         </Routes>
       </BrowserRouter>
     </>

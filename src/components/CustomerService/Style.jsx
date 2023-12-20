@@ -20,11 +20,13 @@ export const PrevButton = styled.button`
     border: 0px;
 
     background-color: transparent;
-    {/* page가 2 이상일 때만 활성화
-        background-image: url(https://res.kurly.com/kurly/ico/2021/paging-prev-activated.svg);
-    */}
+    
     background-repeat: no-repeat;
     background-size: cover;
+    ${({ currentPage }) => currentPage >= 2 && `
+    background-image: url(https://res.kurly.com/kurly/ico/2021/paging-prev-activated.svg);
+    cursor: pointer;
+  `}
 `;
 
 export const NextButton = styled.button`
@@ -85,6 +87,5 @@ export const SubTitle = styled.div`
     display: flex;
     width: 100%;
     padding: 20px 0px;
-    border-bottom: 1px solid rgb(51, 51, 51);
-    border-top: 2px solid rgb(51, 51, 51);
+    border-top: 2px solid rgb(244, 244, 244); 
 `;
