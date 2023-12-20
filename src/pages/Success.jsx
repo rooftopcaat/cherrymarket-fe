@@ -1,6 +1,9 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import "../components/Order/style.css";
+import axios from "axios";
+import { useEffect} from "react";
+
 
 export function SuccessPage() {
   const [isConfirmed, setIsConfirmed] = useState(false);
@@ -8,6 +11,8 @@ export function SuccessPage() {
   const paymentKey = searchParams.get("paymentKey");
   const orderId = searchParams.get("orderId");
   const amount = searchParams.get("amount");
+  const navigate = useNavigate();
+  
   
   console.log("paymentKey", paymentKey);
   console.log("orderId", orderId);
@@ -15,27 +20,32 @@ export function SuccessPage() {
 
   async function confirmPayment() {
     const secret = "test_sk_Z61JOxRQVE1RmbXmvADyVW0X9bAq";
-    const encodedSecret = btoa(secret)
-    // TODO: API를 호출해서 서버에게 paymentKey, orderId, amount를 넘겨주세요.
-    // 서버에선 해당 데이터를 가지고 승인 API를 호출하면 결제가 완료됩니다.
-    // https://docs.tosspayments.com/reference#%EA%B2%B0%EC%A0%9C-%EC%8A%B9%EC%9D%B8
-    const response = await fetch("https://api.tosspayments.com/v1/payments/confirm", {
+    const encodedSecret = btoa(secret);
+    
+    // FormData 객체 생성
+    const formData = new FormData();
+    formData.append("orderId", orderId); // orderId 변수에 저장된 값을 추가
+    formData.append("paymentKey", paymentKey); // paymentKey 변수에 저장된 값을 추가
+    formData.append("amount", amount); // amount 변수에 저장된 값을 추가
+  
+    // 서버로 POST 요청 보내기
+    const response = await fetch("https://server.marketcherry.store/api/order/confirm", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
         "Authorization": `Basic ${encodedSecret}`,
       },
-      body: JSON.stringify({
-        paymentKey,
-        orderId,
-        amount
-      })
+      body: formData, // FormData 객체를 요청 본문으로 설정
     });
-
+  
     if (response.ok) {
       setIsConfirmed(true);
+      navigate('/mypage/order');
     }
   }
+
+  useEffect(() => {
+    confirmPayment();
+  }, []);
 
   return (
     <div className="wrapper w-100">

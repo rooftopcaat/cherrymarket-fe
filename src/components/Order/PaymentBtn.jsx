@@ -50,7 +50,7 @@ const PaymentBtn = () => {
              * @docs https://docs.tosspayments.com/reference/widget-sdk#requestpayment%EA%B2%B0%EC%A0%9C-%EC%A0%95%EB%B3%B4
              */
             await paymentWidget?.requestPayment({
-              orderId: "cherryOrder",
+              orderId: "order-" + generateRandomString(),
               orderName: "토스 티셔츠 외 2건",
               customerName: "네클3주문&결제",
               customerEmail: "customer123@gmail.com",

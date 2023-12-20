@@ -5,6 +5,12 @@ import { BsCart } from "react-icons/bs";
 
 const FixedCard = (props) => {
 
+  function generateImageUrl() {
+    const imageUrlBase = "https://kr.object.ncloudstorage.com/cherry-product/";
+    const imageUrl = `${imageUrlBase}${props.item.goodsCode}/${props.item.goodsCode}_0.png`;
+    return imageUrl;
+  }
+
 
   return (
     <React.Fragment>
@@ -13,26 +19,27 @@ const FixedCard = (props) => {
           <ImageSt>
             <img
               style={{ width: "250px", height: "300px" }}
-              src={props.item.src}
+              src={generateImageUrl()}
             />
           </ImageSt>
           <ButtonSt>
           <BsCart /> 담기
           </ButtonSt>
           <h3 style={{ marginLeft: "4px", fontSize: "16px" }}>
-            {props.item.alt}
+            {props.item.goodsName}
           </h3>
           <OriginalPriceSt>
-          {props.item.originalPrice}원
+          {props.item.price}원
            </OriginalPriceSt>
 
           <span
             style={{ marginLeft: "4px", fontSize: "16px", color: "#FA622F" }}
           >
-            {props.item.sale}
+            {props.item.discountRate}%
           </span>
           <span style={{ marginLeft: "4px", fontSize: "16px" }}>
-            {props.item.price}원
+            {props.item.discountedPrice
+}원
           </span>
         </CardSt>
       </DivSt>

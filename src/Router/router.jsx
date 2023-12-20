@@ -3,7 +3,7 @@ import Main from "../pages/Main";
 import Join from "../pages/Join";
 import Login from "../pages/Login";
 import Cart from "../pages/Cart";
-import Admin from "../pages/Admin";
+import Admin from "../pages/Admin/Admin";
 import Detail from "../pages/Detail";
 import Newest from "../pages/Newest";
 import Order from "../pages/Order";
@@ -26,6 +26,9 @@ import MypageAddress from "../pages/Mypages/MypageAddress";
 import Point from '../pages/Mypages/Point';
 import MyOrderDetail from '../pages/Mypages/MyOrderDetail';
 import MyOrder from "../pages/Mypages/MyOrder";
+import ProductPage from "../pages/Admin/ProductPage";
+import PaymentPage from "../pages/Admin/PaymentPage";
+import NoticePage from "../pages/Admin/NoticePage";
 
 const Router = () => {
   return (
@@ -59,6 +62,9 @@ const Router = () => {
           <Route path="/sandbox" element={<TossPay />} />
           <Route path="/sandbox/success" element={<SuccessPage />} />
           <Route path="/sandbox/fail" element={<FailPage />} />
+          <Route path="/admin/product" element={<ProductPage />} />
+          <Route path="/admin/payment" element={<PaymentPage />} />
+          <Route path="/admin/Notice" element={<NoticePage />} />
         </Routes>
       </BrowserRouter>
     </>

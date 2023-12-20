@@ -15,7 +15,7 @@ const details = [
       "method": "간편결제"
     },
     "shippingDetailsInfo": {
-      "orderCode": "23452345642332323",
+      "orderCode": "MC40MDkwMzgyODYwMzEz",
       "shippingStatus": "ORDER_RECEIVED",
       "recipient": "임유진",
       "recipientContact": "010-7740-9322",
@@ -64,7 +64,7 @@ const details = [
       "method": "신용카드"
     },
     "shippingDetailsInfo": {
-      "orderCode": "87654321987654321",
+      "orderCode": "MC40OTgzNjMzMDMyNTUy",
       "shippingStatus": "발송됨",
       "recipient": "John Doe",
       "recipientContact": "555-555-5555",
@@ -113,7 +113,7 @@ const details = [
       "method": "PayPal"
     },
     "shippingDetailsInfo": {
-      "orderCode": "12345678901234567",
+      "orderCode": "MC4yNjg5MzMwNTcwMzY2",
       "shippingStatus": "배송 완료",
       "recipient": "Jane Smith",
       "recipientContact": "123-456-7890",

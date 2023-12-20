@@ -1,18 +1,45 @@
 
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 
 const  GoodsBox = (props) => {
 
-  console.log(props.item.goodsName);
+  const access_token = sessionStorage.getItem("accessToken");
+  const baseUrl = process.env.REACT_APP_API;
+  const [goodsCode, setGoodsCode] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${baseUrl}/goods/detail?goodsId=${props.item.goodsId}`, {
+          headers: {
+            'Authorization': `Bearer ${access_token}`,
+          }
+        });
+
+        setGoodsCode(response.data.goodsCode);
+        
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+    fetchData();
+  }, []); 
+
+  function generateImageUrl() {
+    const imageUrlBase = "https://kr.object.ncloudstorage.com/cherry-product/";
+    const imageUrl = `${imageUrlBase}${goodsCode}/${goodsCode}_0.png`;
+    return imageUrl;
+  }
 
   return (
     <>
 
     <Container>
-      <Img src='https://product-image.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/product/image/8747602a-3efa-4bc3-a8ef-db74c41d1745.jpg'></Img>
+      <Img src={generateImageUrl()}></Img>
       <TitleDiv>
         <A>{props.item.goodsName}</A>
         <PriceDiv>

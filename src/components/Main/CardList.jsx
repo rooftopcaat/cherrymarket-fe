@@ -18,12 +18,35 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import "./swiperCss.css";
+import axios from 'axios';
+import { useEffect } from 'react';
 
 
 
 
 // 카드 리스트 + 아래쪽 카드 고정값
 const FixedImg = () => {
+ const [FiexdItemPrice, setFiexdItemPirce] = useState([]);
+ const brseUrl = process.env.REACT_APP_API;
+
+
+ useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${brseUrl}/goods/findDiscount`)
+        console.log(response.data)
+        setFiexdItemPirce(response.data)
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
+  }, []); 
+
+  console.log(FiexdItemPrice)
+
+  
 
   return (
     <Container>
@@ -47,7 +70,7 @@ const FixedImg = () => {
       >
         <DivSt>
           {/* 지금 현재는 mainImg 안에 있는 정보들을 map 돌려 붙여넣기 */}
-          {mainImg.map((item) => (
+          {FiexdItemPrice.map((item) => (
           <SwiperSlide key={item.id}><FixedCard key={item.id} item={item}/></SwiperSlide>
           ))}
         </DivSt>

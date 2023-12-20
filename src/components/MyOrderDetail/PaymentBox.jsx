@@ -1,9 +1,18 @@
 import styled from 'styled-components';
 import { H3, TitleContainer } from './Style.jsx';
+import { useState, useEffect } from 'react';
 
 const PatmentBox = (props) => {
+    const [paymentDetail, setPaymentDetail] = useState([]);
 
-    const item = props.paymentDetail;
+    useEffect(() => { // 프록스로 받은 값 goodsItem 에 저장
+
+        if (props.paymentDetail.amountInfo) {
+            setPaymentDetail(props.paymentDetail.amountInfo);
+        }
+      }, [props.paymentDetail.amountInfo]);
+
+      console.log(paymentDetail);
 
   return (
     <>
@@ -13,11 +22,11 @@ const PatmentBox = (props) => {
     <Ul>
         <Li>
             <TitleSapn>상품금액</TitleSapn>
-            <PriceSpan>{item.totalAmount-item.deliveryFee}원</PriceSpan>
+            <PriceSpan>{paymentDetail.totalAmount-paymentDetail.deliveryFee}원</PriceSpan>
         </Li>
         <Li>
             <TitleSapn>배송비</TitleSapn>
-            <PriceSpan>{item.deliveryFee}원</PriceSpan>
+            <PriceSpan>{paymentDetail.deliveryFee}원</PriceSpan>
         </Li>
         <Li>
             <TitleSapn>적립금</TitleSapn>
@@ -25,7 +34,7 @@ const PatmentBox = (props) => {
         </Li>
         <Li>
             <TitleSapn>결제금액</TitleSapn>
-            <PriceSpan>{item.totalAmount}원</PriceSpan>
+            <PriceSpan>{paymentDetail.totalAmount}원</PriceSpan>
         </Li>
         <Li>
             <TitleSapn>적립금액</TitleSapn>
@@ -34,8 +43,8 @@ const PatmentBox = (props) => {
         </Li>
         <Li>
             <TitleSapn>결제방법</TitleSapn>
-            <PriceSpan>{item.method}</PriceSpan>
-        </Li>
+            <PriceSpan>{paymentDetail.method}</PriceSpan>
+        </Li> 
     </Ul>
     
     </>

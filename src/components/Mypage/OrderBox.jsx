@@ -4,8 +4,6 @@ import styled from 'styled-components';
 
 function OrderBox(props) {
 
-  console.log(props);
-  
 
   return (
       <ItemContainer>
@@ -21,7 +19,7 @@ function OrderBox(props) {
             <div style={{display:'flex', flexDirection:'column'}}>
             <Dl>
             <Dt>상품명</Dt>
-            <TitleDd>{props.item.productName}</TitleDd>
+            <TitleDd>{props.item.orderName}</TitleDd>
             </Dl>
             <Dl>
               <Dt>주문번호</Dt>
