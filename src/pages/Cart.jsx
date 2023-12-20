@@ -30,7 +30,7 @@ useEffect(() => {
           'Authorization': `Bearer ${access_token}`,
         }
       });
-      console.log(response.data[0].address)
+      
       setUserAddress(response.data[0].address + ' ' +response.data[0].addressDetail);
 
     } catch (error) {
